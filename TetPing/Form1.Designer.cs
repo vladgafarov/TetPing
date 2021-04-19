@@ -28,47 +28,33 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.board = new System.Windows.Forms.Panel();
-            this.bg = new System.Windows.Forms.Panel();
-            this.bg.SuspendLayout();
+            this.components = new System.ComponentModel.Container();
+            this.timer1 = new System.Windows.Forms.Timer(this.components);
             this.SuspendLayout();
             // 
-            // board
+            // timer1
             // 
-            this.board.BackColor = System.Drawing.SystemColors.ActiveCaption;
-            this.board.Location = new System.Drawing.Point(347, 499);
-            this.board.Name = "board";
-            this.board.Size = new System.Drawing.Size(187, 32);
-            this.board.TabIndex = 0;
-            // 
-            // bg
-            // 
-            this.bg.BackColor = System.Drawing.Color.Transparent;
-            this.bg.Controls.Add(this.board);
-            this.bg.Location = new System.Drawing.Point(0, 0);
-            this.bg.Name = "bg";
-            this.bg.Size = new System.Drawing.Size(887, 560);
-            this.bg.TabIndex = 1;
+            this.timer1.Tick += new System.EventHandler(this.timer1_Tick);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.ScrollBar;
             this.ClientSize = new System.Drawing.Size(884, 561);
-            this.Controls.Add(this.bg);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form1_Paint);
             this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form1_KeyDown_1);
-            this.bg.ResumeLayout(false);
             this.ResumeLayout(false);
 
         }
 
         #endregion
 
-        private System.Windows.Forms.Panel board;
-        private System.Windows.Forms.Panel bg;
+        private System.Windows.Forms.Timer timer1;
     }
 }
 

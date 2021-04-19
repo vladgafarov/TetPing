@@ -17,10 +17,7 @@ namespace TetPing
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-
-            var form = new Form1();
-            form.Size = new Size(900, 600);
-            Application.Run(form);
+            Application.Run(new Form1());
         }
     }
 }
