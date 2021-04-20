@@ -13,7 +13,9 @@ namespace TetPing
 {
     public partial class Form1 : Form
     {
-        private int boardSpeed = 20;
+        private Ball ball;
+        private Board board;
+        private Game game;
 
         public Form1()
         {
@@ -22,42 +24,55 @@ namespace TetPing
             StartPosition = FormStartPosition.CenterScreen;
 
             SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
-
             UpdateStyles();
             
-
-
-            //board.Top = bg.Bottom - (bg.Bottom / 10);
-            //board.Width = 200;
-            //board.Height = 50;
+            timer1.Start();
+            
+            game = new Game(this);
         }
 
         private void Form1_KeyDown_1(object sender, KeyEventArgs e)
         {
-            //if (e.KeyCode == Keys.A || e.KeyCode == Keys.Left)
-            //{
-            //    if (board.Left > bg.Left)
-            //        board.Left -= boardSpeed;
-
-            //}
-            //if (e.KeyCode == Keys.D || e.KeyCode == Keys.Right)
-            //    if (board.Right < bg.Width)
-            //        board.Left += boardSpeed;
+            switch (e.KeyCode)
+            {
+                case Keys.A:
+                case Keys.Left:
+                    game.MoveLeft(true);
+                    break;
+                case Keys.D:
+                case Keys.Right:
+                    game.MoveRight(true);
+                    break;
+            }
+        }
+        
+        private void Form1_KeyUp(object sender, KeyEventArgs e)
+        {
+            switch (e.KeyCode)
+            {
+                case Keys.A:
+                case Keys.Left:
+                    game.MoveLeft(false);
+                    break;
+                case Keys.D:
+                case Keys.Right:
+                    game.MoveRight(false);
+                    break;
+            }
         }
 
         private void Form1_Load(object sender, EventArgs e)
         {
-            //var ball = new Ball(this,e, 200, 200);
         }
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
-            var ball = new Ball(this, e, 200, 200);
-            var board = new Board(this);
+            game.Draw(e);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            game.NewGame();
             Refresh();
         }
     }
