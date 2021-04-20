@@ -13,14 +13,12 @@ namespace TetPing
 {
     public partial class Form1 : Form
     {
-        private Ball ball;
-        private Board board;
         private Game game;
 
         public Form1()
         {
             InitializeComponent();
-            Size = new Size(600, 800);
+            Size = new Size(600, 600);
             StartPosition = FormStartPosition.CenterScreen;
 
             SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
@@ -32,34 +30,29 @@ namespace TetPing
             game = new Game(this);
         }
 
-        private void Form1_KeyDown_1(object sender, KeyEventArgs e)
+        private void SetDirection(KeyEventArgs e, bool isKeyDown)
         {
             switch (e.KeyCode)
             {
                 case Keys.A:
                 case Keys.Left:
-                    game.MoveLeft(true);
+                    game.MoveLeft(isKeyDown);
                     break;
                 case Keys.D:
                 case Keys.Right:
-                    game.MoveRight(true);
+                    game.MoveRight(isKeyDown);
                     break;
             }
+        }
+
+        private void Form1_KeyDown_1(object sender, KeyEventArgs e)
+        {
+            SetDirection(e, true);
         }
         
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
-            switch (e.KeyCode)
-            {
-                case Keys.A:
-                case Keys.Left:
-                    game.MoveLeft(false);
-                    break;
-                case Keys.D:
-                case Keys.Right:
-                    game.MoveRight(false);
-                    break;
-            }
+            SetDirection(e, false);
         }
 
         private void Form1_Load(object sender, EventArgs e)

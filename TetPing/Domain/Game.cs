@@ -22,17 +22,8 @@ namespace TetPing.Domain
 
         public void NewGame(Control form)
         {
-            if (left && board.GetLeft() >= 0)
-            {
-                board.MoveLeft();
-            }
-
-            if (right && board.GetRight() <= form.Width)
-            {
-                board.MoveRight();
-            }
-            
-            ball.Move(form);
+            board.InitMovement(left, right, form);
+            ball.InitMovement(form, board);
         }
 
         public void Draw(PaintEventArgs e)
