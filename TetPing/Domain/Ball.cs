@@ -9,7 +9,7 @@ namespace TetPing.Domain
         private const int Speed = 4;
         private int SpeedHorizontal = Speed;
         private int SpeedVertical = Speed;
-        
+
         // private Panel ball;
         private Image BallTexture = Resource1.ball;
         private Rectangle ball;
@@ -34,7 +34,7 @@ namespace TetPing.Domain
                 BackColor = Color.Transparent
             };
             
-            form.Controls.Add(some);
+            //form.Controls.Add(some);
         }
 
         public void Draw(PaintEventArgs e)
@@ -42,7 +42,7 @@ namespace TetPing.Domain
             e.Graphics.DrawImage(BallTexture, ball);
         }
         
-        public void Move(Control form)
+        public void InitMovement(Control form, Board board)
         {
             ball.X += SpeedHorizontal;
             ball.Y -= SpeedVertical;
@@ -51,11 +51,11 @@ namespace TetPing.Domain
                 SpeedHorizontal *= -1;
             if (ball.Top <= 0)
                 SpeedVertical *= -1;
-            
-            // if(ball.Right <= board.Right + ball.Width - 1 && ball.Bottom == board.Top && ball.Left >= board.Left - ball.Width + 1)
-            // {
-            //     SpeedVertical *= -1;
-            // }
+
+            if (ball.Right <= board.GetRight() + ball.Width - 1 && ball.Bottom >= board.GetTop() && ball.Left >= board.GetLeft() - ball.Width + 1)
+            {
+                SpeedVertical *= -1;
+            }
         }
     }
 }
