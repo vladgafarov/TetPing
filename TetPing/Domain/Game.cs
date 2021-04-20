@@ -20,14 +20,14 @@ namespace TetPing.Domain
             ball = new Ball(form);
         }
 
-        public void NewGame()
+        public void NewGame(Control form)
         {
-            if (left)
+            if (left && board.GetLeft() >= 0)
             {
                 board.MoveLeft();
             }
 
-            if (right)
+            if (right && board.GetRight() <= form.Width)
             {
                 board.MoveRight();
             }

@@ -25,7 +25,8 @@ namespace TetPing
 
             SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
             UpdateStyles();
-            
+
+            timer1.Interval = 1;
             timer1.Start();
             
             game = new Game(this);
@@ -72,7 +73,7 @@ namespace TetPing
 
         private void timer1_Tick(object sender, EventArgs e)
         {
-            game.NewGame();
+            game.NewGame(this);
             Refresh();
         }
     }

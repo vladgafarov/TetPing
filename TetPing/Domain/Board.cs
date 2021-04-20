@@ -13,7 +13,7 @@ namespace TetPing.Domain
         private int Width = 120;
         private int Height = 20;
         private Panel board;
-        private const int Speed = 20;
+        private const int Speed = 10;
 
         public Board(Control f1)
         {
@@ -23,18 +23,14 @@ namespace TetPing.Domain
                 Location = new Point
                 {
                     X = f1.Width / 2 - Width / 2,
-                    Y = f1.Height - f1.Height / 5
+                    Y = f1.Height - f1.Height / 9
                 },
-                // Left = f1.Width / 2 - Width / 2,
-                // Top = f1.Height - f1.Height / 5,
                 BackColor = Color.BlanchedAlmond
             };
             
             f1.Controls.Add(board);
         }
         
-        
-
         public void MoveRight()
         {
             board.Left += Speed;
@@ -43,6 +39,16 @@ namespace TetPing.Domain
         public void MoveLeft()
         {
             board.Left -= Speed;
+        }
+
+        public int GetLeft()
+        {
+            return board.Left;
+        }
+
+        public int GetRight()
+        {
+            return board.Right;
         }
     }
 }
