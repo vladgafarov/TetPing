@@ -50,23 +50,5 @@ namespace TetPing.Domain
         {
             return board.Right;
         }
-
-        public int GetTop()
-        {
-            return board.Top;
-        }
-
-        public void InitMovement(bool left, bool right, Control form)
-        {
-            if (left && board.Left >= 0)
-            {
-                MoveLeft();
-            }
-
-            if (right && board.Right <= form.Width)
-            {
-                MoveRight();
-            }
-        }
     }
 }
