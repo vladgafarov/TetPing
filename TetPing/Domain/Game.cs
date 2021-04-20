@@ -31,6 +31,8 @@ namespace TetPing.Domain
             {
                 board.MoveRight();
             }
+            
+            ball.Move(form);
         }
 
         public void Draw(PaintEventArgs e)

@@ -5,22 +5,57 @@ namespace TetPing.Domain
 {
     class Ball
     {
-        private int Size = 32;
-        private Panel ball;
-        private Image BallTexture = Resource1.ball;
-        private Rectangle rect;
+        private const int Size = 28;
+        private const int Speed = 4;
+        private int SpeedHorizontal = Speed;
+        private int SpeedVertical = Speed;
         
-        public Ball(Control f1)
+        // private Panel ball;
+        private Image BallTexture = Resource1.ball;
+        private Rectangle ball;
+        private PictureBox some;
+        
+        public Ball(Control form)
         {
-            rect = new Rectangle(0, 0, Size, Size);
+            var x = form.Width / 2 - Size / 2;
+            var y = form.Height - form.Height / 6;
+            ball = new Rectangle(x, y, Size, Size);
             
-            f1.Controls.Add(ball);
+            some = new PictureBox
+            {
+                Size = new Size { Width = Size, Height = Size },
+                Location = new Point
+                {
+                    X = x,
+                    Y = y
+                },
+                BackgroundImage = BallTexture,
+                BackgroundImageLayout = ImageLayout.Stretch,
+                BackColor = Color.Transparent
+            };
+            
+            form.Controls.Add(some);
         }
 
         public void Draw(PaintEventArgs e)
         {
-            e.Graphics.DrawImage(BallTexture, rect);
+            e.Graphics.DrawImage(BallTexture, ball);
         }
-
+        
+        public void Move(Control form)
+        {
+            ball.X += SpeedHorizontal;
+            ball.Y -= SpeedVertical;
+            
+            if (ball.Left <= 0 || ball.Right >= form.Width)
+                SpeedHorizontal *= -1;
+            if (ball.Top <= 0)
+                SpeedVertical *= -1;
+            
+            // if(ball.Right <= board.Right + ball.Width - 1 && ball.Bottom == board.Top && ball.Left >= board.Left - ball.Width + 1)
+            // {
+            //     SpeedVertical *= -1;
+            // }
+        }
     }
 }
