@@ -14,6 +14,7 @@ namespace TetPing.Domain
         private int Height = 20;
         private Panel board;
         private const int Speed = 10;
+        private Image BoardTexture = Resources.Resource1.board;
 
         public Board(Control f1)
         {
@@ -25,7 +26,9 @@ namespace TetPing.Domain
                     X = f1.Width / 2 - Width / 2,
                     Y = f1.Height - f1.Height / 9
                 },
-                BackColor = Color.BlanchedAlmond
+                BackColor = Color.Transparent,
+                BackgroundImage = BoardTexture,
+                BackgroundImageLayout = ImageLayout.Stretch
             };
             
             f1.Controls.Add(board);

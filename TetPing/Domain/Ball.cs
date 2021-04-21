@@ -11,7 +11,7 @@ namespace TetPing.Domain
         private int SpeedVertical = Speed;
 
         // private Panel ball;
-        private Image BallTexture = Resource1.ball;
+        private Image BallTexture = Resources.Resource1.ball;
         private Rectangle ball;
         private PictureBox some;
         private int X;
