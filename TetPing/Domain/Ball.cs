@@ -14,11 +14,13 @@ namespace TetPing.Domain
         private Image BallTexture = Resource1.ball;
         private Rectangle ball;
         private PictureBox some;
+        private int x;
+        private int y;
         
         public Ball(Control form)
         {
-            var x = form.Width / 2 - Size / 2;
-            var y = form.Height - form.Height / 6;
+            x = form.Width / 2 - Size / 2;
+            y = form.Height - form.Height / 6;
             ball = new Rectangle(x, y, Size, Size);
             
             some = new PictureBox
@@ -47,13 +49,22 @@ namespace TetPing.Domain
             ball.X += SpeedHorizontal;
             ball.Y -= SpeedVertical;
             
+            //Top, Left, Right
             if (ball.Left <= 0 || ball.Right >= form.Width)
                 SpeedHorizontal *= -1;
             if (ball.Top <= 0)
                 SpeedVertical *= -1;
 
+            //Board
             if (ball.Right <= board.GetRight() + ball.Width - 1 && ball.Bottom >= board.GetTop() && ball.Left >= board.GetLeft() - ball.Width + 1)
             {
+                SpeedVertical *= -1;
+            }
+
+            //Bottom
+            if(ball.Bottom >= form.Bottom)
+            {
+                ball.Location = new Point { X = x, Y = y };
                 SpeedVertical *= -1;
             }
         }
