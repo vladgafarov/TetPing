@@ -14,22 +14,22 @@ namespace TetPing.Domain
         private Image BallTexture = Resource1.ball;
         private Rectangle ball;
         private PictureBox some;
-        private int x;
-        private int y;
+        private int X;
+        private int Y;
         
         public Ball(Control form)
         {
-            x = form.Width / 2 - Size / 2;
-            y = form.Height - form.Height / 6;
-            ball = new Rectangle(x, y, Size, Size);
+            X = form.Width / 2 - Size / 2;
+            Y = form.Height - form.Height / 6;
+            ball = new Rectangle(X, Y, Size, Size);
             
             some = new PictureBox
             {
                 Size = new Size { Width = Size, Height = Size },
                 Location = new Point
                 {
-                    X = x,
-                    Y = y
+                    X = X,
+                    Y = Y
                 },
                 BackgroundImage = BallTexture,
                 BackgroundImageLayout = ImageLayout.Stretch,
@@ -44,7 +44,7 @@ namespace TetPing.Domain
             e.Graphics.DrawImage(BallTexture, ball);
         }
         
-        public void InitMovement(Control form, Board board)
+        public void InitPhysics(Control form, Board board)
         {
             ball.X += SpeedHorizontal;
             ball.Y -= SpeedVertical;
@@ -56,7 +56,7 @@ namespace TetPing.Domain
                 SpeedVertical *= -1;
 
             //Board
-            if (ball.Right <= board.GetRight() + ball.Width - 1 && ball.Bottom >= board.GetTop() && ball.Left >= board.GetLeft() - ball.Width + 1)
+            if (ball.Right <= board.GetRight() + ball.Width && ball.Bottom >= board.GetTop() && ball.Left >= board.GetLeft() - ball.Width && ball.Top < board.GetTop() + 1)
             {
                 SpeedVertical *= -1;
             }
@@ -64,7 +64,7 @@ namespace TetPing.Domain
             //Bottom
             if(ball.Bottom >= form.Bottom)
             {
-                ball.Location = new Point { X = x, Y = y };
+                ball.Location = new Point { X = X, Y = Y };
                 SpeedVertical *= -1;
             }
         }

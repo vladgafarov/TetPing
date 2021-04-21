@@ -56,7 +56,7 @@ namespace TetPing.Domain
             return board.Top;
         }
 
-        public void InitMovement(bool left, bool right, Control form)
+        public void InitPhysics(bool left, bool right, Control form)
         {
             if (left && board.Left >= 0)
             {

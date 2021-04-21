@@ -9,26 +9,26 @@ namespace TetPing.Domain
 {
     class Game
     {
-        private Board board;
-        private Ball ball;
+        private Board Board;
+        private Ball Ball;
         private bool left;
         private bool right;
 
         public Game(Control form)
         {
-            board = new Board(form);
-            ball = new Ball(form);
+            Board = new Board(form);
+            Ball = new Ball(form);
         }
 
         public void NewGame(Control form)
         {
-            board.InitMovement(left, right, form);
-            ball.InitMovement(form, board);
+            Board.InitPhysics(left, right, form);
+            Ball.InitPhysics(form, Board);
         }
 
         public void Draw(PaintEventArgs e)
         {
-            ball.Draw(e);
+            Ball.Draw(e);
         }
 
         public void MoveRight(bool isRight)
