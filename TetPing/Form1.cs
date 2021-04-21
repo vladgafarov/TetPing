@@ -30,8 +30,10 @@ namespace TetPing
             game = new Game(this);
         }
 
-        private void SetDirection(KeyEventArgs e, bool isKeyDown)
+        private void SetDirection(KeyEventArgs e, KeyDirection direction)
         {
+            var isKeyDown = direction == KeyDirection.Down;
+
             switch (e.KeyCode)
             {
                 case Keys.A:
@@ -47,12 +49,12 @@ namespace TetPing
 
         private void Form1_KeyDown_1(object sender, KeyEventArgs e)
         {
-            SetDirection(e, true);
+            SetDirection(e, KeyDirection.Down);
         }
         
         private void Form1_KeyUp(object sender, KeyEventArgs e)
         {
-            SetDirection(e, false);
+            SetDirection(e, KeyDirection.Up);
         }
 
         private void Form1_Load(object sender, EventArgs e)

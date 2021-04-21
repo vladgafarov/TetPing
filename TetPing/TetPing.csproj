@@ -49,6 +49,7 @@
     <Compile Include="Domain\Ball.cs" />
     <Compile Include="Domain\Board.cs" />
     <Compile Include="Domain\Game.cs" />
+    <Compile Include="Domain\KeyDirection.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
