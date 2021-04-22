@@ -17,8 +17,8 @@ namespace TetPing.Domain
         {
             for(var i = 0; i < Count; i++)
             {
-                var HeartItem = new Heart(form, i);
-                HeartsList.Add(HeartItem);
+                var heartItem = new Heart(form, i);
+                HeartsList.Add(heartItem);
             }
         }
 
@@ -28,6 +28,14 @@ namespace TetPing.Domain
             heartToRemove.ChangeBg();
 
             RemovedHearts++;
+        }
+
+        internal void Reset()
+        {
+            foreach(Heart heart in HeartsList)
+            {
+                heart.ChangeBg();
+            }
         }
     }
 }

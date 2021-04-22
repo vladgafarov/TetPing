@@ -50,6 +50,10 @@ namespace TetPing
         private void Form1_KeyDown_1(object sender, KeyEventArgs e)
         {
             SetDirection(e, KeyDirection.Down);
+            if(game.IsGameEnd && e.KeyCode == Keys.Enter)
+            {
+                game.ResetGame(timer1);
+            }
         }
         
         private void Form1_KeyUp(object sender, KeyEventArgs e)
@@ -69,6 +73,10 @@ namespace TetPing
         private void timer1_Tick(object sender, EventArgs e)
         {
             game.NewGame(this);
+            if(game.IsGameEnd)
+            {
+                timer1.Stop();
+            }
             Refresh();
         }
     }

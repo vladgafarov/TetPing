@@ -35,7 +35,10 @@ namespace TetPing.Domain
 
         public void ChangeBg()
         {
-            HeartItem.BackgroundImage = WithoutHeartTexture;
+            if (HeartItem.BackgroundImage == HeartTexture)
+                HeartItem.BackgroundImage = WithoutHeartTexture;
+            else
+                HeartItem.BackgroundImage = HeartTexture;
         }
     }
 }

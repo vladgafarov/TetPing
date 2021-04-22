@@ -9,9 +9,11 @@ namespace TetPing.Domain
 {
     class Game
     {
+        public bool IsGameEnd;
         private Board Board;
         private Ball Ball;
         private Hearts Hearts;
+        private GameOver GameOver;
         private bool left;
         private bool right;
 
@@ -20,6 +22,7 @@ namespace TetPing.Domain
             Board = new Board(form);
             Ball = new Ball(form, 0);
             Hearts = new Hearts(form);
+            GameOver = new GameOver(form);
         }
 
         public void NewGame(Control form)
@@ -34,6 +37,28 @@ namespace TetPing.Domain
                 Hearts.RemoveHeart(removedHearts);
                 Ball.IsFailed = false;
             }
+
+            if(removedHearts == Hearts.Count)
+            {
+                EndGame();
+            }
+        }
+
+        public void EndGame()
+        {
+            IsGameEnd = true;
+            GameOver.EndTrigger();
+        }
+
+        public void ResetGame(Timer timer)
+        {
+            IsGameEnd = false;
+            timer.Start();
+
+            Hearts.RemovedHearts = 0;
+            Hearts.Reset();
+
+            GameOver.ResetTrigger();
         }
 
         public void Draw(PaintEventArgs e)
