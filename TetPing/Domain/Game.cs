@@ -29,10 +29,9 @@ namespace TetPing.Domain
 
             var removedHearts = Hearts.RemovedHearts;
 
-            if(Ball.isFailed)
+            if(Ball.IsFailed)
             {
                 Hearts.RemoveHeart(removedHearts);
-                Ball.isFailed = false;
             }
         }
 
