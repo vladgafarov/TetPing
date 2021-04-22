@@ -32,6 +32,7 @@ namespace TetPing.Domain
             if(Ball.IsFailed)
             {
                 Hearts.RemoveHeart(removedHearts);
+                Ball.IsFailed = false;
             }
         }
 

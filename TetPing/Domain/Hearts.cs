@@ -24,7 +24,7 @@ namespace TetPing.Domain
 
         public void RemoveHeart(int index)
         {
-            Heart heartToRemove = HeartsList[index];
+            Heart heartToRemove = HeartsList[Count - index - 1];
             heartToRemove.ChangeBg();
 
             RemovedHearts++;
