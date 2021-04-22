@@ -49,7 +49,9 @@
     <Compile Include="Domain\Ball.cs" />
     <Compile Include="Domain\Board.cs" />
     <Compile Include="Domain\Game.cs" />
+    <Compile Include="Domain\Hearts.cs" />
     <Compile Include="Domain\KeyDirection.cs" />
+    <Compile Include="Domain\Heart.cs" />
     <Compile Include="Form1.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -106,6 +108,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\board.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\heart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\withoutHeart.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
