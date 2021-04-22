@@ -17,25 +17,25 @@ namespace TetPing.Domain
         private int X;
         private int Y;
         
-        public Ball(Control form)
+        public Ball(Control form, int count)
         {
-            X = form.Width / 2 - Size / 2;
-            Y = form.Height - form.Height / 6;
+            X = form.Width / 2 - Size / 2 + count * 20;
+            Y = form.Height - form.Height / 6 - count * 40;
             ball = new Rectangle(X, Y, Size, Size);
-            
-            some = new PictureBox
-            {
-                Size = new Size { Width = Size, Height = Size },
-                Location = new Point
-                {
-                    X = X,
-                    Y = Y
-                },
-                BackgroundImage = BallTexture,
-                BackgroundImageLayout = ImageLayout.Stretch,
-                BackColor = Color.Transparent
-            };
-            
+
+            //some = new PictureBox
+            //{
+            //    Size = new Size { Width = Size, Height = Size },
+            //    Location = new Point
+            //    {
+            //        X = X,
+            //        Y = Y
+            //    },
+            //    BackgroundImage = BallTexture,
+            //    BackgroundImageLayout = ImageLayout.Center,
+            //    BackColor = Color.Transparent
+            //};
+
             //form.Controls.Add(some);
         }
 
@@ -49,22 +49,24 @@ namespace TetPing.Domain
             ball.X += SpeedHorizontal;
             ball.Y -= SpeedVertical;
             
-            //Top, Left, Right
+            //Left, Right
             if (ball.Left <= 0 || ball.Right >= form.Width)
                 SpeedHorizontal *= -1;
+
+            //Top
             if (ball.Top <= 0)
                 SpeedVertical *= -1;
-
-            //Board
-            if (ball.Right <= board.GetRight() + ball.Width && ball.Bottom >= board.GetTop() && ball.Left >= board.GetLeft() - ball.Width && ball.Top < board.GetTop() + 1)
-            {
-                SpeedVertical *= -1;
-            }
 
             //Bottom
             if(ball.Bottom >= form.Bottom)
             {
                 ball.Location = new Point { X = X, Y = Y };
+                SpeedVertical *= -1;
+            }
+
+            //Board
+            if (ball.Right <= board.GetRight() + ball.Width && ball.Bottom >= board.GetTop() && ball.Left >= board.GetLeft() - ball.Width && ball.Top < board.GetTop() + 1)
+            {
                 SpeedVertical *= -1;
             }
         }
