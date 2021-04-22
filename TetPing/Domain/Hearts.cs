@@ -10,6 +10,7 @@ namespace TetPing.Domain
     class Hearts
     {
         public const int Count = 3;
+        public int RemovedHearts = 0;
         private List<Heart> HeartsList = new List<Heart>(Count);
 
         public Hearts(Control form)
@@ -19,6 +20,14 @@ namespace TetPing.Domain
                 var HeartItem = new Heart(form, i);
                 HeartsList.Add(HeartItem);
             }
+        }
+
+        public void RemoveHeart(int index)
+        {
+            Heart heartToRemove = HeartsList[index];
+            heartToRemove.ChangeBg();
+
+            RemovedHearts++;
         }
     }
 }

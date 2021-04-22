@@ -11,8 +11,6 @@ namespace TetPing.Domain
     {
         private Board Board;
         private Ball Ball;
-        private Ball Ball2;
-        private Heart Heart;
         private Hearts Hearts;
         private bool left;
         private bool right;
@@ -21,22 +19,26 @@ namespace TetPing.Domain
         {
             Board = new Board(form);
             Ball = new Ball(form, 0);
-            //Heart = new Heart(form, 0);
             Hearts = new Hearts(form);
-            //Ball2 = new Ball(form, 2);
         }
 
         public void NewGame(Control form)
         {
             Board.InitPhysics(left, right, form);
             Ball.InitPhysics(form, Board);
-            //Ball2.InitPhysics(form, Board);
+
+            var removedHearts = Hearts.RemovedHearts;
+
+            if(Ball.isFailed)
+            {
+                Hearts.RemoveHeart(removedHearts);
+                Ball.isFailed = false;
+            }
         }
 
         public void Draw(PaintEventArgs e)
         {
             Ball.Draw(e);
-            //Ball2.Draw(e);
         }
 
         public void MoveRight(bool isRight)

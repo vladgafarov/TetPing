@@ -32,5 +32,10 @@ namespace TetPing.Domain
 
             form.Controls.Add(HeartItem);
         }
+
+        public void ChangeBg()
+        {
+            HeartItem.BackgroundImage = WithoutHeartTexture;
+        }
     }
 }

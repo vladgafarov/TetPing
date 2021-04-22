@@ -5,6 +5,7 @@ namespace TetPing.Domain
 {
     class Ball
     {
+        public bool isFailed;
         private const int Size = 28;
         private const int Speed = 4;
         private int SpeedHorizontal = Speed;
@@ -60,6 +61,7 @@ namespace TetPing.Domain
             //Bottom
             if(ball.Bottom >= form.Bottom)
             {
+                isFailed = true;
                 ball.Location = new Point { X = X, Y = Y };
                 SpeedVertical *= -1;
             }
@@ -69,6 +71,11 @@ namespace TetPing.Domain
             {
                 SpeedVertical *= -1;
             }
+        }
+
+        public void Failed()
+        {
+            isFailed = true;
         }
     }
 }
