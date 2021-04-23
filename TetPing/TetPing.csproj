@@ -46,7 +46,9 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Domain\Arrow.cs" />
     <Compile Include="Domain\Ball.cs" />
+    <Compile Include="Domain\Balls.cs" />
     <Compile Include="Domain\Board.cs" />
     <Compile Include="Domain\Game.cs" />
     <Compile Include="Domain\GameOver.cs" />
@@ -115,6 +117,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\withoutHeart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\arrow.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

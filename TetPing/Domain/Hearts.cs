@@ -9,7 +9,7 @@ namespace TetPing.Domain
 {
     class Hearts
     {
-        public const int Count = 3;
+        public const int Count = 1;
         public int RemovedHearts = 0;
         private List<Heart> HeartsList = new List<Heart>(Count);
 

@@ -52,7 +52,9 @@ namespace TetPing.Domain
             
             //Left, Right
             if (ball.Left <= 0 || ball.Right >= form.Width)
+            {
                 SpeedHorizontal *= -1;
+            }
 
             //Top
             if (ball.Top <= 0)
@@ -70,7 +72,13 @@ namespace TetPing.Domain
             if (ball.Right <= board.GetRight() + ball.Width && ball.Bottom >= board.GetTop() && ball.Left >= board.GetLeft() - ball.Width && ball.Top < board.GetTop() + 1)
             {
                 SpeedVertical *= -1;
+                Balls.AddBall(form, board);
             }
+        }
+
+        public void Dispose()
+        {
+            Dispose();
         }
     }
 }
