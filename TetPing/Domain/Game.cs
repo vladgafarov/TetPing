@@ -50,7 +50,7 @@ namespace TetPing.Domain
             GameOver.EndTrigger();
         }
 
-        public void ResetGame(Timer timer)
+        public void ResetGame(Control form, Timer timer)
         {
             IsGameEnd = false;
             timer.Start();
@@ -58,7 +58,9 @@ namespace TetPing.Domain
             Hearts.RemovedHearts = 0;
             Hearts.Reset();
 
-            GameOver.ResetTrigger();
+            Board.Reset(form);
+
+            GameOver.Reset();
         }
 
         public void Draw(PaintEventArgs e)

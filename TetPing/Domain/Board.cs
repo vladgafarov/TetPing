@@ -16,22 +16,22 @@ namespace TetPing.Domain
         private const int Speed = 10;
         private Image BoardTexture = Resources.Resource1.board;
 
-        public Board(Control f1)
+        public Board(Control form)
         {
             board = new Panel
             {
                 Size = new Size { Width = Width, Height = Height },
                 Location = new Point
                 {
-                    X = f1.Width / 2 - Width / 2,
-                    Y = f1.Height - f1.Height / 9
+                    X = form.Width / 2 - Width / 2,
+                    Y = form.Height - form.Height / 9
                 },
                 BackColor = Color.Transparent,
                 BackgroundImage = BoardTexture,
                 BackgroundImageLayout = ImageLayout.Stretch
             };
             
-            f1.Controls.Add(board);
+            form.Controls.Add(board);
         }
         
         public void MoveRight()
@@ -70,6 +70,15 @@ namespace TetPing.Domain
             {
                 MoveRight();
             }
+        }
+
+        public void Reset(Control form)
+        {
+            board.Location = new Point
+            {
+                X = form.Width / 2 - Width / 2,
+                Y = form.Height - form.Height / 9
+            };
         }
     }
 }

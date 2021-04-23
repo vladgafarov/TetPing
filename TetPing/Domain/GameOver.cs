@@ -43,7 +43,7 @@ namespace TetPing.Domain
             Label.Visible = true;
         }
 
-        public void ResetTrigger()
+        public void Reset()
         {
             Label.Visible = false;
         }
