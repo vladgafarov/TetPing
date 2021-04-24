@@ -23,15 +23,13 @@ namespace TetPing.Domain
         {
             Count++;
 
-            var ball = new Ball(form, Count);
-            //ball.InitPhysics(form, board);
+            var ball = new Ball(form);
             BallsList.Add(ball);
         }
 
         public static void Reset()
         {
             BallsList.ForEach(ball => ball.Dispose());
-            //BallsList.Add(FirstBall);
         }
     }
 }

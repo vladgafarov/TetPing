@@ -21,7 +21,7 @@ namespace TetPing.Domain
         public Game(Control form)
         {
             Board = new Board(form);
-            Ball = new Ball(form, 0);
+            Ball = new Ball(form);
             Balls = new Balls(Ball);
             Hearts = new Hearts(form);
             GameOver = new GameOver(form);
@@ -33,13 +33,16 @@ namespace TetPing.Domain
             List<Ball> copyBallsList = new List<Ball>(Balls.BallsList);
 
             Board.InitPhysics(left, right, form);
-            copyBallsList.ForEach(Ball => Ball.InitPhysics(form, Board));
 
-            if(Ball.IsFailed)
-            {
-                Hearts.RemoveHeart(removedHearts);
-                Ball.IsFailed = false;
-            }
+            copyBallsList.ForEach(Ball => {
+                Ball.InitPhysics(form, Board);
+
+                if(Ball.IsFailed)
+                {
+                    Hearts.RemoveHeart(removedHearts);
+                    Ball.IsFailed = false;
+                }
+            });
 
             if(removedHearts == Hearts.Count)
             {
@@ -63,7 +66,7 @@ namespace TetPing.Domain
 
             Board.Reset(form);
 
-            Balls.Reset();
+            //Balls.Reset();
 
             GameOver.Reset();
         }

@@ -18,10 +18,10 @@ namespace TetPing.Domain
         private int X;
         private int Y;
         
-        public Ball(Control form, int count)
+        public Ball(Control form)
         {
-            X = form.Width / 2 - Size / 2 + count * 20;
-            Y = form.Height - form.Height / 6 - count * 40;
+            X = form.Width / 2 - Size / 2;
+            Y = form.Height - form.Height / 6;
             ball = new Rectangle(X, Y, Size, Size);
 
             //some = new PictureBox
