@@ -9,7 +9,7 @@ namespace TetPing.Domain
 {
     class Hearts
     {
-        public const int Count = 5;
+        public const int Count = 3;
         public int RemovedHearts = 0;
         private List<Heart> HeartsList = new List<Heart>(Count);
 
@@ -30,12 +30,9 @@ namespace TetPing.Domain
             RemovedHearts++;
         }
 
-        internal void Reset()
+        public void Reset()
         {
-            foreach(Heart heart in HeartsList)
-            {
-                heart.ChangeBg();
-            }
+            HeartsList.ForEach(heart => heart.ChangeBg());
         }
     }
 }

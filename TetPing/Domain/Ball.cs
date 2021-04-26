@@ -72,7 +72,6 @@ namespace TetPing.Domain
             if (ball.Right <= board.GetRight() + ball.Width && ball.Bottom >= board.GetTop() && ball.Left >= board.GetLeft() - ball.Width && ball.Top < board.GetTop() + 1)
             {
                 SpeedVertical *= -1;
-                Balls.AddBall(form, board);
             }
         }
 

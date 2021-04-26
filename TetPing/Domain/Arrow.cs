@@ -11,34 +11,35 @@ namespace TetPing.Domain
 {
     class Arrow
     {
-        private Image ArrowTexture;
+        private Bitmap ArrowTexture = RotateImage(Resources.Resource1.arrow, 60);
         private PictureBox ArrowItem;
 
         public Arrow(Control form)
         {
             ArrowItem = new PictureBox
             {
-                BackgroundImage = Resources.Resource1.arrow,
-                BackgroundImageLayout = ImageLayout.Stretch,
+                //BackgroundImage = RotateImage(Resources.Resource1.arrow, 80),
+                Image = ArrowTexture,
+                SizeMode = PictureBoxSizeMode.Zoom,
+                //BackgroundImageLayout = ImageLayout.Zoom,
                 BackColor = Color.Transparent,
                 BorderStyle = BorderStyle.FixedSingle,
                 Size = new Size 
                 {
                     Width = 120,
-                    Height = 60
+                    Height = 120
                 },
                 Location = new Point
                 {
                     X = form.Width / 2 - 50,
-                    Y = form.Height - form.Height / 5
+                    Y = form.Height - form.Height / 2
                 }
             };
 
             form.Controls.Add(ArrowItem);
-
         }
 
-        public static Bitmap RotateImage(PictureBox img, float rotationAngle)
+        public static Bitmap RotateImage(Image img, float rotationAngle)
         {
             //create an empty Bitmap image
             Bitmap bmp = new Bitmap(img.Width, img.Height);
@@ -59,7 +60,7 @@ namespace TetPing.Domain
             gfx.InterpolationMode = InterpolationMode.HighQualityBicubic;
 
             //now draw our new image onto the graphics object
-            gfx.DrawImage(img.BackgroundImage, new Point(0, 0));
+            gfx.DrawImage(img, new Point(0, 0));
 
             //dispose of our Graphics object
             gfx.Dispose();

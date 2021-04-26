@@ -15,12 +15,16 @@ namespace TetPing.Domain
         private Ball Ball;
         private Hearts Hearts;
         private GameOver GameOver;
+        private Arrow Arrow;
+        private Block Block;
         private bool left;
         private bool right;
 
         public Game(Control form)
         {
+            //Arrow = new Arrow(form);
             Board = new Board(form);
+            Block = new Block(form);
             Ball = new Ball(form);
             Balls = new Balls(Ball);
             Hearts = new Hearts(form);
