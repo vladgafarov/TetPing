@@ -1,13 +1,13 @@
 ﻿using System.Drawing;
 using System.Windows.Forms;
 
-namespace TetPing.Domain
+namespace TetPing
 {
     class Ball
     {
         public bool IsFailed;
         private const int Size = 28;
-        private const int Speed = 4;
+        private const int Speed = 6;
         private int SpeedHorizontal = Speed;
         private int SpeedVertical = Speed;
 
@@ -17,7 +17,7 @@ namespace TetPing.Domain
         private PictureBox some;
         private int X;
         private int Y;
-        
+
         public Ball(Control form)
         {
             X = form.Width / 2 - Size / 2;
@@ -58,7 +58,9 @@ namespace TetPing.Domain
 
             //Top
             if (ball.Top <= 0)
+            {
                 SpeedVertical *= -1;
+            }
 
             //Bottom
             if(ball.Bottom >= form.Bottom)

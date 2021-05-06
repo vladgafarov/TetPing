@@ -1,11 +1,11 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Drawing;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace TetPing.Domain
+namespace TetPing
 {
     class Game
     {
@@ -17,6 +17,8 @@ namespace TetPing.Domain
         private GameOver GameOver;
         private Arrow Arrow;
         private Block Block;
+        private Blocks Blocks;
+        private Map Map;
         private bool left;
         private bool right;
 
@@ -24,11 +26,12 @@ namespace TetPing.Domain
         {
             //Arrow = new Arrow(form);
             Board = new Board(form);
-            Block = new Block(form);
             Ball = new Ball(form);
             Balls = new Balls(Ball);
             Hearts = new Hearts(form);
             GameOver = new GameOver(form);
+            Map = new Map(form);
+            Block = new Block();
         }
 
         public void NewGame(Control form)
@@ -38,13 +41,13 @@ namespace TetPing.Domain
 
             Board.InitPhysics(left, right, form);
 
-            copyBallsList.ForEach(Ball => {
-                Ball.InitPhysics(form, Board);
+            copyBallsList.ForEach(ball => {
+                ball.InitPhysics(form, Board);
 
-                if(Ball.IsFailed)
+                if(ball.IsFailed)
                 {
                     Hearts.RemoveHeart(removedHearts);
-                    Ball.IsFailed = false;
+                    ball.IsFailed = false;
                 }
             });
 
@@ -70,6 +73,7 @@ namespace TetPing.Domain
 
             Board.Reset(form);
 
+
             //Balls.Reset();
 
             GameOver.Reset();
@@ -77,10 +81,9 @@ namespace TetPing.Domain
 
         public void Draw(PaintEventArgs e)
         {
-            //Ball.Draw(e);
-            //Balls.Draw(e);
-
-            Balls.BallsList.ForEach(Ball => Ball.Draw(e));
+            Balls.BallsList.ForEach(ball => ball.Draw(e));
+            //Blocks.BlocksList.ForEach(block => block.Draw(e));
+            Map.BlocksList.ForEach(block => block.Draw(e));
         }
 
         public void MoveRight(bool isRight)
@@ -91,6 +94,13 @@ namespace TetPing.Domain
         public void MoveLeft(bool isLeft)
         {
             left = isLeft;
+        }
+
+        private void InitBlocks(Control form)
+        {
+            int x = 30;
+            int y = 30;
+            Blocks blocks = new Blocks(form, x, y, 3);
         }
     }
 }

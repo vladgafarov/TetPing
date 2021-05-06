@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace TetPing.Domain
+namespace TetPing
 {
     public enum KeyDirection
     {

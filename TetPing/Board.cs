@@ -6,14 +6,14 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace TetPing.Domain
+namespace TetPing
 {
     class Board
     {
         private int Width = 120;
         private int Height = 20;
         private Panel board;
-        private const int Speed = 10;
+        private const int Speed = 15;
         private Image BoardTexture = Resources.Resource1.board;
 
         public Board(Control form)

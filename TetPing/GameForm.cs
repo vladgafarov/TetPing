@@ -7,24 +7,27 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using TetPing.Domain;
 
 namespace TetPing
 {
-    public partial class Form1 : Form
+    public partial class GameForm : Form
     {
         private Game game;
 
-        public Form1()
+        public GameForm()
         {
             InitializeComponent();
+            BackgroundImage = Resources.Resource1.bg;
+            BackgroundImageLayout = ImageLayout.Stretch;
             Size = new Size(600, 600);
             StartPosition = FormStartPosition.CenterScreen;
+            Text = "Ping-Break-Pong";
 
-            SetStyle(ControlStyles.OptimizedDoubleBuffer | ControlStyles.AllPaintingInWmPaint | ControlStyles.UserPaint, true);
+            SetStyle(ControlStyles.AllPaintingInWmPaint, true);
+            SetStyle(ControlStyles.OptimizedDoubleBuffer, true);
             UpdateStyles();
 
-            timer1.Interval = 1;
+            timer1.Interval = 30;
             timer1.Start();
             
             game = new Game(this);
@@ -67,17 +70,19 @@ namespace TetPing
 
         private void Form1_Paint(object sender, PaintEventArgs e)
         {
+            //game.e = e;
             game.Draw(e);
         }
 
         private void timer1_Tick(object sender, EventArgs e)
         {
+            Invalidate();
+            //Refresh();
             game.NewGame(this);
             if(game.IsGameEnd)
             {
                 timer1.Stop();
             }
-            Refresh();
         }
     }
 }

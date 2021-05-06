@@ -1,6 +1,6 @@
 ﻿namespace TetPing
 {
-    partial class Form1
+    partial class GameForm
     {
         /// <summary>
         /// Обязательная переменная конструктора.
