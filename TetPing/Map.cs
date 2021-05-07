@@ -24,7 +24,7 @@ namespace TetPing
             //map[2, 5] = 1;
             //map[10, 10] = 1;
             //map[10, 11] = 1;
-            Init();
+            //Init();
         }
 
         public static void Init()

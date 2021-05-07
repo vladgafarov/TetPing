@@ -41,7 +41,7 @@ namespace TetPing
                     case BlockTypes.Line:
                         CreateLine(form, Orientation, X * i * 6, Y, quantity);
                         break;
-                    case BlockTypes.L:
+                    case BlockTypes.Random:
                         CreateRandomForm(form, Orientation, X * i * 6, Y, quantity);
                         break;
                     default:

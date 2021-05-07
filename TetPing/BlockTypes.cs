@@ -17,7 +17,7 @@ namespace TetPing
          * |   ____|
          * |_
          */
-        L,
+        Random,
         /*
          *  |_
          *  |_  |_|_|

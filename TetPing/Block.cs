@@ -20,15 +20,14 @@ namespace TetPing
         private Image BlockTexture = Resources.Resource1.block;
         private Rectangle block;
 
-        private Random random = new Random();
-        private BlockTypes BlockType;
-        private Orientation Orientation;
-        private int Count = 2;
+        private static Random random = new Random();
+        private static BlockTypes BlockType;
+        private static Orientation Orientation;
+        private int Count = 3;
 
         public Block() 
         {
-            CreateBlocks();
-            Map.Init();
+            CreateBlocks(4);
         }
 
         public Block(int x, int y)
@@ -61,9 +60,11 @@ namespace TetPing
         }
         #endregion
 
-        public void CreateBlocks()
+        public static void CreateBlocks(int count)
         {
-            for (var i = 0; i < Count; i++)
+            int[] last = new int[] { 1, 1 };
+
+            for (var i = 0; i < count; i++)
             {
                 BlockType = random.NextEnum<BlockTypes>();
                 Orientation = random.NextEnum<Orientation>();
@@ -72,21 +73,21 @@ namespace TetPing
                 switch (BlockType)
                 {
                     case BlockTypes.Line:
-                        CreateLine(Orientation, 1, 1, quantity);
+                        last = CreateLine(Orientation, last[0], last[1], quantity);
                         break;
-                    case BlockTypes.L:
-                        CreateRandomForm(Orientation, 1, 1, quantity);
+                    case BlockTypes.Random:
+                        last = CreateRandomForm(Orientation, last[0], last[1], quantity);
                         break;
-                    //default:
-                    //    CreateRandomForm(form, Orientation, 0, 0, quantity);
-                    //    break;
                 }
             }
+
+            Map.Init();
         }
 
-        private void CreateRandomForm(Orientation orientation, int x, int y, int quantity)
+        private static int[] CreateRandomForm(Orientation orientation, int x, int y, int quantity)
         {
             int chance;
+            var firstY = y;
 
             for (var i = 0; i < quantity; i++)
             {
@@ -126,22 +127,29 @@ namespace TetPing
                         break;
                 }
             }
+
+            return new int[] { x + 1, firstY };
         }
 
-        private void CreateLine(Orientation orientation, int x, int y, int quantity)
+        private static int[] CreateLine(Orientation orientation, int x, int y, int quantity)
         {
+            var last = new int[] { x, y };
+
             for (var i = 0; i < quantity; i++)
             {
                 switch (orientation)
                 {
                     case Orientation.Horizontal:
                         Map.map[x + i, y] = 1;
+                        last[0] = x + i;
                         break;
                     case Orientation.Vertical:
                         Map.map[x, y + i] = 1;
                         break;
                 }
             }
+            last[0]++;
+            return last;
         }
     }
 
