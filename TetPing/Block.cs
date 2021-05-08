@@ -21,17 +21,16 @@ namespace TetPing
         private Rectangle block;
 
         private static Random random = new Random();
-        private static BlockTypes BlockType;
-        private static Orientation Orientation;
-        private int Count = 3;
 
         public Block() 
         {
-            CreateBlocks(4);
+            CreateBlocks(5);
         }
 
         public Block(int x, int y)
         {
+            if (y > 2) y -= 3;
+            //else y -= 3;
             block = new Rectangle(x * Size, y * Size, Size, Size);
         }
 
@@ -62,7 +61,10 @@ namespace TetPing
 
         public static void CreateBlocks(int count)
         {
-            int[] last = new int[] { 1, 1 };
+            BlockTypes BlockType;
+            Orientation Orientation;
+
+            int[] last = new int[] { 1, 4 };
 
             for (var i = 0; i < count; i++)
             {
@@ -91,6 +93,7 @@ namespace TetPing
 
             for (var i = 0; i < quantity; i++)
             {
+                if (x >= Map.mapWidth - 1) break;
                 switch (orientation)
                 {
                     case Orientation.Horizontal:
@@ -119,7 +122,8 @@ namespace TetPing
                         {
                             chance = random.Next(2);
                             x = chance == 0 ? x + 1 : x - 1;
-                            Map.map[x, y] = 1;
+                            if(x > 0)
+                                Map.map[x, y] = 1;
 
                             y += 1;
                             x = chance == 0 ? x - 1 : x + 1;
@@ -137,6 +141,7 @@ namespace TetPing
 
             for (var i = 0; i < quantity; i++)
             {
+                if (x + i >= Map.mapWidth - 1) break;
                 switch (orientation)
                 {
                     case Orientation.Horizontal:
@@ -148,7 +153,7 @@ namespace TetPing
                         break;
                 }
             }
-            last[0]++;
+            last[0] += 1;
             return last;
         }
     }
