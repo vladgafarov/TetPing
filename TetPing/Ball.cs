@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System.Collections.Generic;
+using System.Drawing;
 using System.Windows.Forms;
 
 namespace TetPing
@@ -49,7 +50,9 @@ namespace TetPing
         {
             ball.X += SpeedHorizontal;
             ball.Y -= SpeedVertical;
-            
+
+            #region walls
+
             //Left, Right
             if (ball.Left <= 0 || ball.Right >= form.Width)
             {
@@ -70,11 +73,27 @@ namespace TetPing
                 SpeedVertical *= -1;
             }
 
+            #endregion
+
             //Board
             if (ball.Right <= board.GetRight() + ball.Width && ball.Bottom >= board.GetTop() && ball.Left >= board.GetLeft() - ball.Width && ball.Top < board.GetTop() + 1)
             {
                 SpeedVertical *= -1;
             }
+
+            List<Block> copyBlocksList = new List<Block>(Map.BlocksList);
+
+            copyBlocksList.ForEach(block =>
+            {
+                if(ball.IntersectsWith(block.GetRectBlock()))
+                {
+                    block.Remove(block);
+                    if (SpeedVertical > 0 && SpeedHorizontal > 0 || SpeedVertical < 0 && SpeedHorizontal > 0)
+                        SpeedVertical *= -1;
+                    if (SpeedVertical < 0 && SpeedHorizontal < 0 || SpeedVertical > 0 && SpeedHorizontal < 0)
+                        SpeedHorizontal *= -1;
+                }
+            });
         }
 
         public void Dispose()

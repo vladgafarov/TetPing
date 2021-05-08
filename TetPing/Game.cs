@@ -34,6 +34,8 @@ namespace TetPing
             Block = new Block();
         }
 
+        #region gameStates
+
         public void NewGame(Control form)
         {
             var removedHearts = Hearts.RemovedHearts;
@@ -79,10 +81,11 @@ namespace TetPing
             GameOver.Reset();
         }
 
+        #endregion
+
         public void Draw(PaintEventArgs e)
         {
             Balls.BallsList.ForEach(ball => ball.Draw(e));
-            //Blocks.BlocksList.ForEach(block => block.Draw(e));
             Map.BlocksList.ForEach(block => block.Draw(e));
         }
 
@@ -94,13 +97,6 @@ namespace TetPing
         public void MoveLeft(bool isLeft)
         {
             left = isLeft;
-        }
-
-        private void InitBlocks(Control form)
-        {
-            int x = 30;
-            int y = 30;
-            Blocks blocks = new Blocks(form, x, y, 3);
         }
     }
 }

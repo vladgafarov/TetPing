@@ -34,7 +34,7 @@ namespace TetPing
             block = new Rectangle(x * Size, y * Size, Size, Size);
         }
 
-        #region physics
+        #region utils
 
         public void SetLocation(int x, int y)
         {
@@ -52,10 +52,20 @@ namespace TetPing
             block.Y = y * Size;
         }
 
-
         public void Draw(PaintEventArgs e)
         {
             e.Graphics.DrawImage(BlockTexture, block);
+        }
+
+        public void Remove(Block block)
+        {
+            var index = Map.BlocksList.IndexOf(block);
+            Map.BlocksList.RemoveAt(index);
+        }
+
+        public Rectangle GetRectBlock()
+        {
+            return block;
         }
         #endregion
 
@@ -151,6 +161,7 @@ namespace TetPing
                     case Orientation.Vertical:
                         Map.map[x, y + i] = 1;
                         break;
+
                 }
             }
             last[0] += 1;
