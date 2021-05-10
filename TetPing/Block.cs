@@ -60,7 +60,8 @@ namespace TetPing
         public void Remove(Block block)
         {
             var index = Map.BlocksList.IndexOf(block);
-            Map.BlocksList.RemoveAt(index);
+            if(index >= 0)
+                Map.BlocksList.RemoveAt(index);
         }
 
         public Rectangle GetRectBlock()

@@ -19,7 +19,7 @@ namespace TetPing
             BallsList.Add(FirstBall);
         }
 
-        public static void AddBall(Control form, Board board)
+        public static void AddBall(Control form)
         {
             Count++;
 

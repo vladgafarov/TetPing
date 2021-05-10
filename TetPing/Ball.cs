@@ -10,12 +10,11 @@ namespace TetPing
         private const int Size = 28;
         private const int Speed = 6;
         private int SpeedHorizontal = Speed;
-        private int SpeedVertical = Speed;
+        private int SpeedVertical = -Speed;
 
         // private Panel ball;
         private Image BallTexture = Resources.Resource1.ball;
         private Rectangle ball;
-        private PictureBox some;
         private int X;
         private int Y;
 
@@ -49,7 +48,7 @@ namespace TetPing
         public void InitPhysics(Control form, Board board)
         {
             ball.X += SpeedHorizontal;
-            ball.Y -= SpeedVertical;
+            ball.Y += SpeedVertical;
 
             #region walls
 
@@ -85,13 +84,63 @@ namespace TetPing
 
             copyBlocksList.ForEach(block =>
             {
-                if(ball.IntersectsWith(block.GetRectBlock()))
+                var rectBlock = block.GetRectBlock();
+                var inaccuracy = 7;
+
+                var blockBottom = rectBlock.Bottom - inaccuracy;
+                var blockTop = rectBlock.Top + inaccuracy;
+                var blockLeft = rectBlock.Left + inaccuracy;
+                var blockRight = rectBlock.Right - inaccuracy;
+                var ballBottom = ball.Bottom;
+                var ballTop = ball.Top;
+                var ballLeft = ball.Left;
+                var ballRight = ball.Right;
+
+                if (ball.IntersectsWith(rectBlock))
                 {
+                    // Trajectory
+                    // To bottom right
+                    if (SpeedVertical > 0 && SpeedHorizontal > 0)
+                    {
+                        // 1. Top board
+                        if (ballBottom <= blockTop && ballRight >= blockLeft)
+                            SpeedVertical *= -1;
+                        // 2. Left board
+                        if (ballBottom > blockTop && ballRight < blockLeft)
+                            SpeedHorizontal *= -1;
+                    }
+                    // To top left
+                    if (SpeedVertical < 0 && SpeedHorizontal < 0)
+                    {
+                        // 1. Bottom board
+                        if (ballTop >= blockBottom && ballLeft <= blockRight)
+                            SpeedVertical *= -1;
+                        // 2. Right board
+                        if (ballTop < blockBottom && ballLeft > blockRight)
+                            SpeedHorizontal *= -1;
+                    }
+
+                    // To top right
+                    if (SpeedVertical < 0 && SpeedHorizontal > 0)
+                    {
+                        // 1. Bottom board
+                        if (ballTop >= blockBottom && ballRight >= blockLeft)
+                            SpeedVertical *= -1;
+                        // 2. Left board
+                        if (ballTop < blockBottom && ballRight < blockLeft)
+                            SpeedHorizontal *= -1;
+                    }
+                    // To bottom left
+                    if (SpeedVertical > 0 && SpeedHorizontal < 0)
+                    {
+                        // 1. Top board
+                        if (ballBottom <= blockTop && ballLeft <= blockRight)
+                            SpeedVertical *= -1;
+                        // 2. Right board
+                        if (ballBottom > blockTop && ballLeft > blockRight)
+                            SpeedHorizontal *= -1;
+                    }
                     block.Remove(block);
-                    if (SpeedVertical > 0 && SpeedHorizontal > 0 || SpeedVertical < 0 && SpeedHorizontal > 0)
-                        SpeedVertical *= -1;
-                    if (SpeedVertical < 0 && SpeedHorizontal < 0 || SpeedVertical > 0 && SpeedHorizontal < 0)
-                        SpeedHorizontal *= -1;
                 }
             });
         }
