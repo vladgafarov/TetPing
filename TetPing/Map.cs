@@ -21,26 +21,42 @@ namespace TetPing
             //map[0, 1] = 1;
             //map[0, 2] = 1;
             //map[1, 3] = 1;
-            //map[2, 5] = 1;
+            //map[17, 14] = 1;
             //map[10, 10] = 1;
-            //map[10, 11] = 1;
+            //map[15, 14] = 1;
             //Init();
         }
 
         public static void Init()
         {
-            for(var i = 0; i < mapHeight; i++)
+            for(var y = 0; y < mapHeight; y++)
             {
-                for(var j = 0; j < mapWidth; j++)
+                for(var x = 0; x < mapWidth; x++)
                 {
-                    if (map[i, j] == 1)
+                    if (map[y, x] == 1)
                     {
-                        var block = new Block(i, j);
+                        var block = new Block(x, y, 1);
                         BlocksList.Add(block);
-                        //block.Remove();
                     }
                 }
             }
+        }
+
+        public static bool IsHiddenPartEmpty(int heightForSearching)
+        {
+            int count = 0;
+            int countShould = mapWidth * heightForSearching;
+
+            for (int i = 0; i < mapWidth; i++)
+            {   
+                for (int j = 0; j < heightForSearching; j++)
+                {
+                    if (map[j, i] == 0)
+                        count++;
+                }
+            }
+
+            return count == countShould;
         }
     }
 }

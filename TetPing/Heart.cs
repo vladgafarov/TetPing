@@ -12,7 +12,7 @@ namespace TetPing
     {
         private static int Width = 37;
         private static int Height = 32;
-        private static Image HeartTexture = Resources.Resource1.heart;
+        private static Image HeartTexture = Resources.Resource1.heartNew;
         private static Image WithoutHeartTexture = Resources.Resource1.withoutHeart;
         private PictureBox HeartItem;
 

@@ -13,13 +13,16 @@ namespace TetPing
     public partial class GameForm : Form
     {
         private Game game;
+        public static new int Width = 600;
+        public static new int Height = 720;
+        public static int time;
 
         public GameForm()
         {
             InitializeComponent();
             BackgroundImage = Resources.Resource1.bg;
             BackgroundImageLayout = ImageLayout.Stretch;
-            Size = new Size(600, 600);
+            Size = new Size(Width, Height);
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Ping-Break-Pong";
 
@@ -53,7 +56,7 @@ namespace TetPing
         private void Form1_KeyDown_1(object sender, KeyEventArgs e)
         {
             SetDirection(e, KeyDirection.Down);
-            if(game.IsGameEnd && e.KeyCode == Keys.Enter)
+            if(Game.IsGameEnd && e.KeyCode == Keys.Enter)
             {
                 game.ResetGame(this, timer1);
             }
@@ -78,11 +81,11 @@ namespace TetPing
         {
             Invalidate();
             //Refresh();
+            time += timer1.Interval;
             game.NewGame(this);
-            if(game.IsGameEnd)
-            {
+
+            if(Game.IsGameEnd)
                 timer1.Stop();
-            }
         }
     }
 }

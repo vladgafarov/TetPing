@@ -13,15 +13,15 @@ namespace TetPing
         private int SpeedVertical = -Speed;
 
         // private Panel ball;
-        private Image BallTexture = Resources.Resource1.ball;
+        private Image BallTexture = Resources.Resource1.ballNew;
         private Rectangle ball;
         private int X;
         private int Y;
 
-        public Ball(Control form)
+        public Ball()
         {
-            X = form.Width / 2 - Size / 2;
-            Y = form.Height - form.Height / 6;
+            X = GameForm.Width / 2 - Size / 2;
+            Y = GameForm.Height - GameForm.Height / 5;
             ball = new Rectangle(X, Y, Size, Size);
 
             //some = new PictureBox

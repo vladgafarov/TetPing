@@ -9,7 +9,7 @@ namespace TetPing
 {
     class Game
     {
-        public bool IsGameEnd;
+        public static bool IsGameEnd;
         private Board Board;
         private Balls Balls;
         private Ball Ball;
@@ -21,12 +21,13 @@ namespace TetPing
         private Map Map;
         private bool left;
         private bool right;
+        private int DownShiftInterval = 6000;
 
         public Game(Control form)
         {
             //Arrow = new Arrow(form);
-            Board = new Board(form);
-            Ball = new Ball(form);
+            Board = new Board();
+            Ball = new Ball();
             Balls = new Balls(Ball);
             Hearts = new Hearts(form);
             GameOver = new GameOver(form);
@@ -40,6 +41,7 @@ namespace TetPing
         {
             var removedHearts = Hearts.RemovedHearts;
             List<Ball> copyBallsList = new List<Ball>(Balls.BallsList);
+            //List<Block> copyBlockList = new List<Block>(Map.BlocksList);
 
             Board.InitPhysics(left, right, form);
 
@@ -53,13 +55,27 @@ namespace TetPing
                 }
             });
 
+            Map.BlocksList.ForEach(block =>
+            {
+                if (GameForm.time % DownShiftInterval == 0)
+                {
+                    block.DownShift();
+                };
+
+            });
+
+            if (Map.IsHiddenPartEmpty(3))
+            {
+                Block.CreateBlocks(5, 1);
+            }
+
             if(removedHearts == Hearts.Count)
             {
                 EndGame();
             }
         }
 
-        public void EndGame()
+        public static void EndGame()
         {
             IsGameEnd = true;
             GameOver.EndTrigger();
@@ -73,8 +89,7 @@ namespace TetPing
             Hearts.RemovedHearts = 0;
             Hearts.Reset();
 
-            Board.Reset(form);
-
+            Board.Reset();
 
             //Balls.Reset();
 
@@ -87,6 +102,7 @@ namespace TetPing
         {
             Balls.BallsList.ForEach(ball => ball.Draw(e));
             Map.BlocksList.ForEach(block => block.Draw(e));
+            Board.Draw(e);
         }
 
         public void MoveRight(bool isRight)

@@ -10,7 +10,7 @@ namespace TetPing
 {
     class GameOver
     {
-        private Label Label;
+        public static Label Label;
         private int Width = 300;
         private int Height = 100;
 
@@ -38,7 +38,7 @@ namespace TetPing
             form.Controls.Add(Label);
         }
 
-        public void EndTrigger()
+        public static void EndTrigger()
         {
             Label.Visible = true;
         }

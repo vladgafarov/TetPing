@@ -11,37 +11,43 @@ namespace TetPing
     class Board
     {
         private int Width = 120;
-        private int Height = 20;
-        private Panel board;
+        private int Height = 32;
         private const int Speed = 15;
-        private Image BoardTexture = Resources.Resource1.board;
+        private Image BoardTexture = Resources.Resource1.boardNew;
+        private Rectangle board;
+        private int X;
+        private int Y;
 
-        public Board(Control form)
+        public Board()
         {
-            board = new Panel
-            {
-                Size = new Size { Width = Width, Height = Height },
-                Location = new Point
-                {
-                    X = form.Width / 2 - Width / 2,
-                    Y = form.Height - form.Height / 9
-                },
-                BackColor = Color.Transparent,
-                BackgroundImage = BoardTexture,
-                BackgroundImageLayout = ImageLayout.Stretch
-            };
+            X = GameForm.Width / 2 - Width / 2;
+            Y = GameForm.Height - GameForm.Height / 7;
+
+            board = new Rectangle(X, Y, Width, Height);
+            //board = new Panel
+            //{
+            //    Size = new Size { Width = Width, Height = Height },
+            //    Location = new Point
+            //    {
+            //        X = form.Width / 2 - Width / 2,
+            //        Y = form.Height - form.Height / 9
+            //    },
+            //    BackColor = Color.Transparent,
+            //    BackgroundImage = BoardTexture,
+            //    BackgroundImageLayout = ImageLayout.Stretch
+            //};
             
-            form.Controls.Add(board);
+            //form.Controls.Add(board);
         }
         
         public void MoveRight()
         {
-            board.Left += Speed;
+            board.X += Speed;
         }
 
         public void MoveLeft()
         {
-            board.Left -= Speed;
+            board.X -= Speed;
         }
 
         public int GetLeft()
@@ -66,19 +72,24 @@ namespace TetPing
                 MoveLeft();
             }
 
-            if (right && board.Right <= form.Width)
+            if (right && board.Right <= GameForm.Width)
             {
                 MoveRight();
             }
         }
 
-        public void Reset(Control form)
+        public void Reset()
         {
             board.Location = new Point
             {
-                X = form.Width / 2 - Width / 2,
-                Y = form.Height - form.Height / 9
+                X = X,
+                Y = Y
             };
+        }
+
+        public void Draw(PaintEventArgs e)
+        {
+            e.Graphics.DrawImage(BoardTexture, board);
         }
     }
 }

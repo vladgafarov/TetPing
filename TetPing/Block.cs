@@ -17,21 +17,28 @@ namespace TetPing
     class Block
     {
         public const int Size = 40;
-        private Image BlockTexture = Resources.Resource1.block;
+        private Image BlockTexture = Resources.Resource1.blockNew;
         private Rectangle block;
+        private int MapX;
+        private int MapY;
+        private int Y;
+        private int Type;
 
         private static Random random = new Random();
 
         public Block() 
         {
-            CreateBlocks(5);
+            CreateBlocks(5, 4);
         }
 
-        public Block(int x, int y)
+        public Block(int x, int y, int type)
         {
-            if (y > 2) y -= 3;
-            //else y -= 3;
-            block = new Rectangle(x * Size, y * Size, Size, Size);
+            MapX = x;
+            MapY = y;
+            Type = type;
+            Y = y;
+            Y -= 3;
+            block = new Rectangle(x * Size, Y * Size, Size, Size);
         }
 
         #region utils
@@ -70,12 +77,12 @@ namespace TetPing
         }
         #endregion
 
-        public static void CreateBlocks(int count)
+        public static void CreateBlocks(int count, int y)
         {
             BlockTypes BlockType;
             Orientation Orientation;
 
-            int[] last = new int[] { 1, 4 };
+            var lastX = 1;
 
             for (var i = 0; i < count; i++)
             {
@@ -86,10 +93,10 @@ namespace TetPing
                 switch (BlockType)
                 {
                     case BlockTypes.Line:
-                        last = CreateLine(Orientation, last[0], last[1], quantity);
+                        lastX = CreateLine(Orientation, lastX, y, quantity);
                         break;
                     case BlockTypes.Random:
-                        last = CreateRandomForm(Orientation, last[0], last[1], quantity);
+                        lastX = CreateRandomForm(Orientation, lastX, y, quantity);
                         break;
                 }
             }
@@ -97,10 +104,9 @@ namespace TetPing
             Map.Init();
         }
 
-        private static int[] CreateRandomForm(Orientation orientation, int x, int y, int quantity)
+        private static int CreateRandomForm(Orientation orientation, int x, int y, int quantity)
         {
             int chance;
-            var firstY = y;
 
             for (var i = 0; i < quantity; i++)
             {
@@ -110,14 +116,14 @@ namespace TetPing
                     case Orientation.Horizontal:
                         if (i % 2 != 0 || i == 0)
                         {
-                            Map.map[x, y] = 1;
+                            Map.map[y, x] = 1;
                             x = i == 0 ? x + 1 : x;
                         }
                         else
                         {
                             chance = random.Next(2);
                             y = chance == 0 ? y + 1 : y - 1;
-                            Map.map[x, y] = 1;
+                            Map.map[y, x] = 1;
 
                             x += 1;
                             y = chance == 0 ? y - 1 : y + 1;
@@ -126,7 +132,7 @@ namespace TetPing
                     case Orientation.Vertical:
                         if (i % 2 != 0 || i == 0)
                         {
-                            Map.map[x, y] = 1;
+                            Map.map[y, x] = 1;
                             y = i == 0 ? y + 1 : y;
                         }
                         else
@@ -134,7 +140,7 @@ namespace TetPing
                             chance = random.Next(2);
                             x = chance == 0 ? x + 1 : x - 1;
                             if(x > 0)
-                                Map.map[x, y] = 1;
+                                Map.map[y, x] = 1;
 
                             y += 1;
                             x = chance == 0 ? x - 1 : x + 1;
@@ -143,12 +149,12 @@ namespace TetPing
                 }
             }
 
-            return new int[] { x + 1, firstY };
+            return x;
         }
 
-        private static int[] CreateLine(Orientation orientation, int x, int y, int quantity)
+        private static int CreateLine(Orientation orientation, int x, int y, int quantity)
         {
-            var last = new int[] { x, y };
+            var lastX = x;
 
             for (var i = 0; i < quantity; i++)
             {
@@ -156,17 +162,31 @@ namespace TetPing
                 switch (orientation)
                 {
                     case Orientation.Horizontal:
-                        Map.map[x + i, y] = 1;
-                        last[0] = x + i;
+                        Map.map[y, x + i] = 1;
+                        lastX = x + i;
                         break;
                     case Orientation.Vertical:
-                        Map.map[x, y + i] = 1;
+                        Map.map[y + i, x] = 1;
                         break;
 
                 }
             }
-            last[0] += 1;
-            return last;
+            return lastX + 1;
+        }
+
+        public void DownShift()
+        {
+            var nextY = Y + 1;
+
+            if (nextY == Map.mapHeight - 4)
+                Game.EndGame();
+
+            SetY(nextY);
+            Map.map[MapY, MapX] = 0;
+            Map.map[MapY + 1, MapX] = Type;
+
+            Y += 1;
+            MapY += 1;
         }
     }
 

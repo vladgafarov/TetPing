@@ -11,7 +11,7 @@ namespace TetPing
     {
         public const int Count = 3;
         public int RemovedHearts = 0;
-        private List<Heart> HeartsList = new List<Heart>(Count);
+        public List<Heart> HeartsList = new List<Heart>(Count);
 
         public Hearts(Control form)
         {

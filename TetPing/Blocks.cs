@@ -57,7 +57,7 @@ namespace TetPing
 
             for (var i = 0; i < quantity; i++)
             {
-                Block block = new Block(x, y);
+                Block block = new Block(x, y, 1);
                 BlocksList.Add(block);
 
                 switch (orientation)
@@ -107,7 +107,7 @@ namespace TetPing
         {
             for (var i = 0; i < quantity; i++)
             {
-                Block block = new Block(x, y);
+                Block block = new Block(x, y, 1);
                 BlocksList.Add(block);
 
                 switch (orientation)
