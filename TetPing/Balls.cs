@@ -11,6 +11,7 @@ namespace TetPing
     {
         public static int Count = 1;
         public static List<Ball> BallsList = new List<Ball>(Count);
+        public static int MaxCount = 3;
         private static Ball FirstBall;
 
         public Balls(Ball firstBall)

@@ -45,12 +45,21 @@ namespace TetPing
             Board.InitPhysics(left, right, form);
 
             copyBallsList.ForEach(ball => {
-                ball.InitPhysics(form, Board);
+                ball.InitPhysics(Board);
+
+                var index = Balls.BallsList.IndexOf(ball);
 
                 if(ball.IsFailed)
                 {
                     Hearts.RemoveHeart(removedHearts);
-                    ball.IsFailed = false;
+                    if(index == 0)
+                        ball.IsFailed = false;
+                }
+
+                if(index > 0 && ball.IsFailed)
+                {
+                    Balls.BallsList.Remove(ball);
+                    Balls.Count -= 1;
                 }
             });
 

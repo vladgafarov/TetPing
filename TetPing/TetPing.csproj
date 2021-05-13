@@ -90,6 +90,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource1.resx</DependentUpon>
     </Compile>
+    <Compile Include="Score.cs" />
     <Compile Include="Tests.cs" />
     <EmbeddedResource Include="GameForm.resx">
       <DependentUpon>GameForm.cs</DependentUpon>
@@ -163,6 +164,9 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\blockExtraPoints.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blockAddSpeed.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">

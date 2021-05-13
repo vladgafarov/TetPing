@@ -8,9 +8,10 @@ namespace TetPing
     {
         public bool IsFailed;
         private const int Size = 28;
-        private const int Speed = 6;
-        private int SpeedHorizontal = Speed;
-        private int SpeedVertical = -Speed;
+        private int Speed = 6;
+        private int MaxSpeed = 12;
+        private int SpeedHorizontal;
+        private int SpeedVertical;
 
         // private Panel ball;
         private Image BallTexture = Resources.Resource1.ballNew;
@@ -20,8 +21,11 @@ namespace TetPing
 
         public Ball()
         {
+            SpeedHorizontal = Speed;
+            SpeedVertical = -Speed;
             X = GameForm.Width / 2 - Size / 2;
             Y = GameForm.Height - GameForm.Height / 5;
+
             ball = new Rectangle(X, Y, Size, Size);
 
             //some = new PictureBox
@@ -45,7 +49,7 @@ namespace TetPing
             e.Graphics.DrawImage(BallTexture, ball);
         }
         
-        public void InitPhysics(Control form, Board board)
+        public void InitPhysics(Board board)
         {
             ball.X += SpeedHorizontal;
             ball.Y += SpeedVertical;
@@ -53,7 +57,7 @@ namespace TetPing
             #region walls
 
             //Left, Right
-            if (ball.Left <= 0 || ball.Right >= form.Width)
+            if (ball.Left <= 0 || ball.Right >= GameForm.Width)
             {
                 SpeedHorizontal *= -1;
             }
@@ -65,7 +69,7 @@ namespace TetPing
             }
 
             //Bottom
-            if(ball.Bottom >= form.Bottom)
+            if(ball.Bottom >= GameForm.Height)
             {
                 IsFailed = true;
                 ball.Location = new Point { X = X, Y = Y };
@@ -144,9 +148,14 @@ namespace TetPing
                     }
                     #endregion
 
-                    if(block.Type == 2)
+                    if(block.Type == 2 && Balls.Count < Balls.MaxCount)
                     {
                         Balls.AddBall();
+                    }
+
+                    if(block.Type == 4 && (int)(Speed * 1.25) <= MaxSpeed)
+                    {
+                        Speed *= (int)1.25;
                     }
 
                     block.Remove();

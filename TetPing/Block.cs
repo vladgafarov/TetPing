@@ -42,6 +42,8 @@ namespace TetPing
                 BlockTexture = Resources.Resource1.blockBall;
             else if (Type == 3)
                 BlockTexture = Resources.Resource1.blockExtraPoints;
+            else if (Type == 4)
+                BlockTexture = Resources.Resource1.blockAddSpeed;
             else
                 BlockTexture = Resources.Resource1.blockNew;
 
@@ -215,6 +217,8 @@ namespace TetPing
                 type = 2;
             else if (BlockTypeChance == 1 || BlockTypeChance == 2)
                 type = 3;
+            else if (BlockTypeChance == 3)
+                type = 4;
 
             return type;
         }
