@@ -85,7 +85,7 @@ namespace TetPing
             copyBlocksList.ForEach(block =>
             {
                 var rectBlock = block.GetRectBlock();
-                var inaccuracy = 7;
+                var inaccuracy = 7.5;
 
                 var blockBottom = rectBlock.Bottom - inaccuracy;
                 var blockTop = rectBlock.Top + inaccuracy;
@@ -98,6 +98,8 @@ namespace TetPing
 
                 if (ball.IntersectsWith(rectBlock))
                 {
+                    #region Trajectory
+
                     // Trajectory
                     // To bottom right
                     if (SpeedVertical > 0 && SpeedHorizontal > 0)
@@ -140,7 +142,14 @@ namespace TetPing
                         if (ballBottom > blockTop && ballLeft > blockRight)
                             SpeedHorizontal *= -1;
                     }
-                    block.Remove(block);
+                    #endregion
+
+                    if(block.Type == 2)
+                    {
+                        Balls.AddBall();
+                    }
+
+                    block.Remove();
                 }
             });
         }

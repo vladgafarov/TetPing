@@ -14,9 +14,10 @@ namespace TetPing
         public static int mapWidth = 15;
         public static List<Block> BlocksList = new List<Block>();
 
-        public Map(Control form)
+        public Map()
         {
             map = new int[mapHeight, mapWidth];
+
             //map[0, 0] = 1;
             //map[0, 1] = 1;
             //map[0, 2] = 1;
@@ -33,9 +34,9 @@ namespace TetPing
             {
                 for(var x = 0; x < mapWidth; x++)
                 {
-                    if (map[y, x] == 1)
+                    if (map[y, x] != 0)
                     {
-                        var block = new Block(x, y, 1);
+                        var block = new Block(x, y, map[y, x]);
                         BlocksList.Add(block);
                     }
                 }

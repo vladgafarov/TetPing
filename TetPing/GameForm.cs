@@ -58,7 +58,7 @@ namespace TetPing
             SetDirection(e, KeyDirection.Down);
             if(Game.IsGameEnd && e.KeyCode == Keys.Enter)
             {
-                game.ResetGame(this, timer1);
+                game.ResetGame(timer1);
             }
         }
         

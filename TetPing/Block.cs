@@ -17,12 +17,12 @@ namespace TetPing
     class Block
     {
         public const int Size = 40;
-        private Image BlockTexture = Resources.Resource1.blockNew;
+        public int Type;
+        private Image BlockTexture;
         private Rectangle block;
         private int MapX;
         private int MapY;
         private int Y;
-        private int Type;
 
         private static Random random = new Random();
 
@@ -31,12 +31,20 @@ namespace TetPing
             CreateBlocks(5, 4);
         }
 
-        public Block(int x, int y, int type)
+        public Block(int x, int y, int typeNumber)
         {
             MapX = x;
             MapY = y;
-            Type = type;
             Y = y;
+            Type = typeNumber;
+
+            if (Type == 2)
+                BlockTexture = Resources.Resource1.blockBall;
+            else if (Type == 3)
+                BlockTexture = Resources.Resource1.blockExtraPoints;
+            else
+                BlockTexture = Resources.Resource1.blockNew;
+
             Y -= 3;
             block = new Rectangle(x * Size, Y * Size, Size, Size);
         }
@@ -64,11 +72,14 @@ namespace TetPing
             e.Graphics.DrawImage(BlockTexture, block);
         }
 
-        public void Remove(Block block)
+        public void Remove()
         {
-            var index = Map.BlocksList.IndexOf(block);
+            var index = Map.BlocksList.IndexOf(this);
             if(index >= 0)
+            {
+                Map.map[MapY, MapX] = 0;
                 Map.BlocksList.RemoveAt(index);
+            }
         }
 
         public Rectangle GetRectBlock()
@@ -79,23 +90,23 @@ namespace TetPing
 
         public static void CreateBlocks(int count, int y)
         {
-            BlockTypes BlockType;
+            BlocksTypes BlocksTypes;
             Orientation Orientation;
 
             var lastX = 1;
 
             for (var i = 0; i < count; i++)
             {
-                BlockType = random.NextEnum<BlockTypes>();
+                BlocksTypes = random.NextEnum<BlocksTypes>();
                 Orientation = random.NextEnum<Orientation>();
                 var quantity = random.Next(3, 9);
 
-                switch (BlockType)
+                switch (BlocksTypes)
                 {
-                    case BlockTypes.Line:
+                    case BlocksTypes.Line:
                         lastX = CreateLine(Orientation, lastX, y, quantity);
                         break;
-                    case BlockTypes.Random:
+                    case BlocksTypes.Random:
                         lastX = CreateRandomForm(Orientation, lastX, y, quantity);
                         break;
                 }
@@ -110,20 +121,22 @@ namespace TetPing
 
             for (var i = 0; i < quantity; i++)
             {
+                var type = GetRandomBlockType();
+
                 if (x >= Map.mapWidth - 1) break;
                 switch (orientation)
                 {
                     case Orientation.Horizontal:
                         if (i % 2 != 0 || i == 0)
                         {
-                            Map.map[y, x] = 1;
+                            Map.map[y, x] = type;
                             x = i == 0 ? x + 1 : x;
                         }
                         else
                         {
                             chance = random.Next(2);
                             y = chance == 0 ? y + 1 : y - 1;
-                            Map.map[y, x] = 1;
+                            Map.map[y, x] = type;
 
                             x += 1;
                             y = chance == 0 ? y - 1 : y + 1;
@@ -132,7 +145,7 @@ namespace TetPing
                     case Orientation.Vertical:
                         if (i % 2 != 0 || i == 0)
                         {
-                            Map.map[y, x] = 1;
+                            Map.map[y, x] = type;
                             y = i == 0 ? y + 1 : y;
                         }
                         else
@@ -140,7 +153,7 @@ namespace TetPing
                             chance = random.Next(2);
                             x = chance == 0 ? x + 1 : x - 1;
                             if(x > 0)
-                                Map.map[y, x] = 1;
+                                Map.map[y, x] = type;
 
                             y += 1;
                             x = chance == 0 ? x - 1 : x + 1;
@@ -158,15 +171,17 @@ namespace TetPing
 
             for (var i = 0; i < quantity; i++)
             {
+                var type = GetRandomBlockType();
+
                 if (x + i >= Map.mapWidth - 1) break;
                 switch (orientation)
                 {
                     case Orientation.Horizontal:
-                        Map.map[y, x + i] = 1;
+                        Map.map[y, x + i] = type;
                         lastX = x + i;
                         break;
                     case Orientation.Vertical:
-                        Map.map[y + i, x] = 1;
+                        Map.map[y + i, x] = type;
                         break;
 
                 }
@@ -187,6 +202,21 @@ namespace TetPing
 
             Y += 1;
             MapY += 1;
+        }
+
+        private static int GetRandomBlockType()
+        {
+            var BlockTypeBallRandom = 20;
+
+            var type = 1;
+            var BlockTypeChance = random.Next(BlockTypeBallRandom);
+
+            if (BlockTypeChance == 0)
+                type = 2;
+            else if (BlockTypeChance == 1 || BlockTypeChance == 2)
+                type = 3;
+
+            return type;
         }
     }
 

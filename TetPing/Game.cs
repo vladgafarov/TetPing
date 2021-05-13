@@ -17,7 +17,6 @@ namespace TetPing
         private GameOver GameOver;
         private Arrow Arrow;
         private Block Block;
-        private Blocks Blocks;
         private Map Map;
         private bool left;
         private bool right;
@@ -31,7 +30,7 @@ namespace TetPing
             Balls = new Balls(Ball);
             Hearts = new Hearts(form);
             GameOver = new GameOver(form);
-            Map = new Map(form);
+            Map = new Map();
             Block = new Block();
         }
 
@@ -64,7 +63,7 @@ namespace TetPing
 
             });
 
-            if (Map.IsHiddenPartEmpty(3))
+            if (Map.IsHiddenPartEmpty(4))
             {
                 Block.CreateBlocks(5, 1);
             }
@@ -81,7 +80,7 @@ namespace TetPing
             GameOver.EndTrigger();
         }
 
-        public void ResetGame(Control form, Timer timer)
+        public void ResetGame(Timer timer)
         {
             IsGameEnd = false;
             timer.Start();
