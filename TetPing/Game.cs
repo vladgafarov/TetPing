@@ -18,9 +18,10 @@ namespace TetPing
         private Arrow Arrow;
         private Block Block;
         private Map Map;
+        private Score Score;
         private bool left;
         private bool right;
-        private int DownShiftInterval = 6000;
+        private int DownShiftInterval = 5400;
 
         public Game(Control form)
         {
@@ -32,6 +33,7 @@ namespace TetPing
             GameOver = new GameOver(form);
             Map = new Map();
             Block = new Block();
+            Score = new Score(form);
         }
 
         #region gameStates

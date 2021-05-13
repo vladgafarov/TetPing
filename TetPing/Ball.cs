@@ -9,7 +9,7 @@ namespace TetPing
         public bool IsFailed;
         private const int Size = 28;
         private int Speed = 6;
-        private int MaxSpeed = 12;
+        private int MaxSpeed = 10;
         private int SpeedHorizontal;
         private int SpeedVertical;
 
@@ -148,16 +148,29 @@ namespace TetPing
                     }
                     #endregion
 
-                    if(block.Type == 2 && Balls.Count < Balls.MaxCount)
+                    if (block.Type == 1)
+                    {
+                        Score.score += 10;
+                    }
+
+                    if (block.Type == 2 && Balls.Count < Balls.MaxCount)
                     {
                         Balls.AddBall();
+                        Score.score += 50;
                     }
 
-                    if(block.Type == 4 && (int)(Speed * 1.25) <= MaxSpeed)
+                    if (block.Type == 3)
+                    {
+                        Score.score += 100;
+                    }
+
+                    if (block.Type == 4 && (int)(Speed * 1.25) <= MaxSpeed)
                     {
                         Speed *= (int)1.25;
+                        Score.score += 50;
                     }
 
+                    Score.ScoreBoard.Text = Score.score.ToString();
                     block.Remove();
                 }
             });
