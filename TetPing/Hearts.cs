@@ -9,9 +9,10 @@ namespace TetPing
 {
     class Hearts
     {
-        public const int Count = 3;
-        public int RemovedHearts = 0;
-        public List<Heart> HeartsList = new List<Heart>(Count);
+        public static int Count = 3;
+        public static int MaxCount = 5;
+        public static int RemovedHearts = 0;
+        public static List<Heart> HeartsList = new List<Heart>(Count);
 
         public Hearts(Control form)
         {
@@ -22,12 +23,24 @@ namespace TetPing
             }
         }
 
-        public void RemoveHeart(int index)
+        public static void AddHeart(Control form)
         {
-            Heart heartToRemove = HeartsList[Count - index - 1];
-            heartToRemove.ChangeBg();
+            var heart = new Heart(form, Count);
+            HeartsList.Add(heart);
 
-            RemovedHearts++;
+            Count++;
+        }
+
+        public void RemoveHeart(Control form)
+        {
+            //Heart heartToRemove = HeartsList[Count - index - 1];
+            //heartToRemove.ChangeBg();
+
+            //RemovedHearts++;
+            Count--;
+
+            form.Controls.Remove(HeartsList[Count].HeartItem);
+            HeartsList.RemoveAt(Count);
         }
 
         public void Reset()

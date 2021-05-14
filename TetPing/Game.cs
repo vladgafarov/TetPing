@@ -21,7 +21,7 @@ namespace TetPing
         private Score Score;
         private bool left;
         private bool right;
-        private int DownShiftInterval = 5400;
+        private int DownShiftInterval;
 
         public Game(Control form)
         {
@@ -34,6 +34,13 @@ namespace TetPing
             Map = new Map();
             Block = new Block();
             Score = new Score(form);
+
+            if (Balls.Count == 3)
+                DownShiftInterval = 4800;
+            else if (Balls.Count == 2)
+                DownShiftInterval = 5100;
+            else
+                DownShiftInterval = 5400;
         }
 
         #region gameStates
@@ -47,13 +54,13 @@ namespace TetPing
             Board.InitPhysics(left, right, form);
 
             copyBallsList.ForEach(ball => {
-                ball.InitPhysics(Board);
+                ball.InitPhysics(form, Board);
 
                 var index = Balls.BallsList.IndexOf(ball);
 
                 if(ball.IsFailed)
                 {
-                    Hearts.RemoveHeart(removedHearts);
+                    Hearts.RemoveHeart(form);
                     if(index == 0)
                         ball.IsFailed = false;
                 }
@@ -79,7 +86,7 @@ namespace TetPing
                 Block.CreateBlocks(5, 1);
             }
 
-            if(removedHearts == Hearts.Count)
+            if(Hearts.Count == 0)
             {
                 EndGame();
             }

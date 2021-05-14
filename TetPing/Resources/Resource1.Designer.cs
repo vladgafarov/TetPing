@@ -113,6 +113,16 @@ namespace TetPing.Resources {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap blockAddHeart {
+            get {
+                object obj = ResourceManager.GetObject("blockAddHeart", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap blockAddSpeed {
             get {
                 object obj = ResourceManager.GetObject("blockAddSpeed", resourceCulture);
@@ -156,6 +166,36 @@ namespace TetPing.Resources {
         internal static System.Drawing.Bitmap board {
             get {
                 object obj = ResourceManager.GetObject("board", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap board1 {
+            get {
+                object obj = ResourceManager.GetObject("board1", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap board2 {
+            get {
+                object obj = ResourceManager.GetObject("board2", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap board3 {
+            get {
+                object obj = ResourceManager.GetObject("board3", resourceCulture);
                 return ((System.Drawing.Bitmap)(obj));
             }
         }

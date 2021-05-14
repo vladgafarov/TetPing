@@ -12,11 +12,12 @@ namespace TetPing
     {
         private int Width = 120;
         private int Height = 32;
-        private const int Speed = 15;
-        private Image BoardTexture = Resources.Resource1.boardNew;
+        private const int Speed = 18;
+        private Image BoardTexture = Resources.Resource1.board1;
         private Rectangle board;
         private int X;
         private int Y;
+        private int index;
 
         public Board()
         {
@@ -24,20 +25,6 @@ namespace TetPing
             Y = GameForm.Height - GameForm.Height / 7;
 
             board = new Rectangle(X, Y, Width, Height);
-            //board = new Panel
-            //{
-            //    Size = new Size { Width = Width, Height = Height },
-            //    Location = new Point
-            //    {
-            //        X = form.Width / 2 - Width / 2,
-            //        Y = form.Height - form.Height / 9
-            //    },
-            //    BackColor = Color.Transparent,
-            //    BackgroundImage = BoardTexture,
-            //    BackgroundImageLayout = ImageLayout.Stretch
-            //};
-            
-            //form.Controls.Add(board);
         }
         
         public void MoveRight()
@@ -65,6 +52,11 @@ namespace TetPing
             return board.Top;
         }
 
+        public Rectangle GetRect()
+        {
+            return board;
+        }
+
         public void InitPhysics(bool left, bool right, Control form)
         {
             if (left && board.Left >= 0)
@@ -89,6 +81,11 @@ namespace TetPing
 
         public void Draw(PaintEventArgs e)
         {
+            //index++;
+            //if (index == 0) BoardTexture = Resources.Resource1.board1;
+            //if (index == 1) BoardTexture = Resources.Resource1.board2;
+            //if (index == 2) BoardTexture = Resources.Resource1.board3;
+            //if (index > 2) index = 0;
             e.Graphics.DrawImage(BoardTexture, board);
         }
     }

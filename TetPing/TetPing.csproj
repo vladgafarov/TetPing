@@ -168,6 +168,18 @@
   <ItemGroup>
     <None Include="Resources\blockAddSpeed.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\blockAddHeart.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\board1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\board2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\board3.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
     <PropertyGroup>

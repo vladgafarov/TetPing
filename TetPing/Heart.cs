@@ -14,7 +14,7 @@ namespace TetPing
         private static int Height = 32;
         private static Image HeartTexture = Resources.Resource1.heartNew;
         private static Image WithoutHeartTexture = Resources.Resource1.withoutHeart;
-        private PictureBox HeartItem;
+        public PictureBox HeartItem;
 
         public Heart(Control form, int index)
         {

@@ -9,7 +9,7 @@ namespace TetPing
         public bool IsFailed;
         private const int Size = 28;
         private int Speed = 6;
-        private int MaxSpeed = 10;
+        private int MaxSpeed = 9;
         private int SpeedHorizontal;
         private int SpeedVertical;
 
@@ -27,21 +27,6 @@ namespace TetPing
             Y = GameForm.Height - GameForm.Height / 5;
 
             ball = new Rectangle(X, Y, Size, Size);
-
-            //some = new PictureBox
-            //{
-            //    Size = new Size { Width = Size, Height = Size },
-            //    Location = new Point
-            //    {
-            //        X = X,
-            //        Y = Y
-            //    },
-            //    BackgroundImage = BallTexture,
-            //    BackgroundImageLayout = ImageLayout.Center,
-            //    BackColor = Color.Transparent
-            //};
-
-            //form.Controls.Add(some);
         }
 
         public void Draw(PaintEventArgs e)
@@ -49,7 +34,7 @@ namespace TetPing
             e.Graphics.DrawImage(BallTexture, ball);
         }
         
-        public void InitPhysics(Board board)
+        public void InitPhysics(Control form, Board board)
         {
             ball.X += SpeedHorizontal;
             ball.Y += SpeedVertical;
@@ -79,7 +64,7 @@ namespace TetPing
             #endregion
 
             //Board
-            if (ball.Right <= board.GetRight() + ball.Width && ball.Bottom >= board.GetTop() && ball.Left >= board.GetLeft() - ball.Width && ball.Top < board.GetTop() + 1)
+            if (ball.IntersectsWith(board.GetRect()))
             {
                 SpeedVertical *= -1;
             }
@@ -89,7 +74,7 @@ namespace TetPing
             copyBlocksList.ForEach(block =>
             {
                 var rectBlock = block.GetRectBlock();
-                var inaccuracy = 7.5;
+                var inaccuracy = 7;
 
                 var blockBottom = rectBlock.Bottom - inaccuracy;
                 var blockTop = rectBlock.Top + inaccuracy;
@@ -99,6 +84,8 @@ namespace TetPing
                 var ballTop = ball.Top;
                 var ballLeft = ball.Left;
                 var ballRight = ball.Right;
+                
+                var isDone = false;
 
                 if (ball.IntersectsWith(rectBlock))
                 {
@@ -112,7 +99,7 @@ namespace TetPing
                         if (ballBottom <= blockTop && ballRight >= blockLeft)
                             SpeedVertical *= -1;
                         // 2. Left board
-                        if (ballBottom > blockTop && ballRight < blockLeft)
+                        else if (ballBottom > blockTop && ballRight < blockLeft)
                             SpeedHorizontal *= -1;
                     }
                     // To top left
@@ -122,7 +109,7 @@ namespace TetPing
                         if (ballTop >= blockBottom && ballLeft <= blockRight)
                             SpeedVertical *= -1;
                         // 2. Right board
-                        if (ballTop < blockBottom && ballLeft > blockRight)
+                        else if (ballTop < blockBottom && ballLeft > blockRight)
                             SpeedHorizontal *= -1;
                     }
 
@@ -133,7 +120,7 @@ namespace TetPing
                         if (ballTop >= blockBottom && ballRight >= blockLeft)
                             SpeedVertical *= -1;
                         // 2. Left board
-                        if (ballTop < blockBottom && ballRight < blockLeft)
+                        else if(ballTop < blockBottom && ballRight < blockLeft)
                             SpeedHorizontal *= -1;
                     }
                     // To bottom left
@@ -143,30 +130,39 @@ namespace TetPing
                         if (ballBottom <= blockTop && ballLeft <= blockRight)
                             SpeedVertical *= -1;
                         // 2. Right board
-                        if (ballBottom > blockTop && ballLeft > blockRight)
+                        else if (ballBottom > blockTop && ballLeft > blockRight)
                             SpeedHorizontal *= -1;
                     }
                     #endregion
+
 
                     if (block.Type == 1)
                     {
                         Score.score += 10;
                     }
 
-                    if (block.Type == 2 && Balls.Count < Balls.MaxCount)
+                    else if (block.Type == 2 && Balls.Count < Balls.MaxCount && !isDone)
                     {
+                        isDone = true;
                         Balls.AddBall();
                         Score.score += 50;
                     }
 
-                    if (block.Type == 3)
+                    else if (block.Type == 3)
                     {
                         Score.score += 100;
                     }
 
-                    if (block.Type == 4 && (int)(Speed * 1.25) <= MaxSpeed)
+                    else if (block.Type == 4 && (int)(Speed * 1.2) <= MaxSpeed)
                     {
-                        Speed *= (int)1.25;
+                        Speed *= (int)1.2;
+                        Score.score += 50;
+                    }
+
+                    else if (block.Type == 5 && Hearts.Count < Hearts.MaxCount && !isDone)
+                    {
+                        isDone = true;
+                        Hearts.AddHeart(form);
                         Score.score += 50;
                     }
 
