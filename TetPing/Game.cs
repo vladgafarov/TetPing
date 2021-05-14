@@ -35,12 +35,8 @@ namespace TetPing
             Block = new Block();
             Score = new Score(form);
 
-            if (Balls.Count == 3)
-                DownShiftInterval = 4800;
-            else if (Balls.Count == 2)
-                DownShiftInterval = 5100;
-            else
-                DownShiftInterval = 5400;
+            
+            DownShiftInterval = 5400;
         }
 
         #region gameStates
@@ -50,6 +46,13 @@ namespace TetPing
             var removedHearts = Hearts.RemovedHearts;
             List<Ball> copyBallsList = new List<Ball>(Balls.BallsList);
             //List<Block> copyBlockList = new List<Block>(Map.BlocksList);
+
+            if (Balls.Count == 3)
+                DownShiftInterval = 3900;
+            else if (Balls.Count == 2)
+                DownShiftInterval = 4800;
+            else
+                DownShiftInterval = 5400;
 
             Board.InitPhysics(left, right, form);
 
