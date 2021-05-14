@@ -83,7 +83,7 @@ namespace TetPing
 
             if (Map.IsHiddenPartEmpty(4))
             {
-                Block.CreateBlocks(5, 1);
+                Block.CreateBlocks(6, 1);
             }
 
             if(Hearts.Count == 0)

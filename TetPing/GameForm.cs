@@ -20,8 +20,8 @@ namespace TetPing
         public GameForm()
         {
             InitializeComponent();
-            BackgroundImage = Resources.Resource1.bg;
-            BackgroundImageLayout = ImageLayout.Stretch;
+            BackgroundImage = Resources.Resource1.bgNew;
+            BackgroundImageLayout = ImageLayout.Center;
             Size = new Size(Width, Height);
             StartPosition = FormStartPosition.CenterScreen;
             Text = "Ping-Break-Pong";

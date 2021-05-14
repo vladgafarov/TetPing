@@ -28,7 +28,7 @@ namespace TetPing
 
         public Block() 
         {
-            CreateBlocks(5, 4);
+            CreateBlocks(6, 4);
         }
 
         public Block(int x, int y, int typeNumber)
