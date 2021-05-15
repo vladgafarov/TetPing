@@ -166,7 +166,7 @@ namespace TetPing
                 }
             }
 
-            return x;
+            return x + 1;
         }
 
         private static int CreateLine(Orientation orientation, int x, int y, int quantity)
@@ -190,22 +190,24 @@ namespace TetPing
 
                 }
             }
-            return lastX + 1;
+            return lastX + 2;
         }
 
         public void DownShift()
         {
             var nextY = Y + 1;
 
-            if (nextY == Map.mapHeight - 4)
+            if (nextY == Map.mapHeight - 3)
                 Game.EndGame();
+            else
+            {
+                SetY(nextY);
+                Map.map[MapY, MapX] = 0;
+                Map.map[MapY + 1, MapX] = Type;
 
-            SetY(nextY);
-            Map.map[MapY, MapX] = 0;
-            Map.map[MapY + 1, MapX] = Type;
-
-            Y += 1;
-            MapY += 1;
+                Y += 1;
+                MapY += 1;
+            }
         }
 
         private static int GetRandomBlockType()

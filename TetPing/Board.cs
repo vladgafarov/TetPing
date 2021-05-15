@@ -22,7 +22,7 @@ namespace TetPing
         public Board()
         {
             X = GameForm.Width / 2 - Width / 2;
-            Y = GameForm.Height - GameForm.Height / 6;
+            Y = GameForm.Height - 80;
 
             board = new Rectangle(X, Y, Width, Height);
         }

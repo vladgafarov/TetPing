@@ -141,9 +141,8 @@ namespace TetPing
                         Score.score += 10;
                     }
 
-                    else if (block.Type == 2 && Balls.Count < Balls.MaxCount && !isDone)
+                    else if (block.Type == 2 && Balls.Count < Balls.MaxCount)
                     {
-                        isDone = true;
                         Balls.AddBall();
                         Score.score += 50;
                     }
@@ -153,9 +152,9 @@ namespace TetPing
                         Score.score += 100;
                     }
 
-                    else if (block.Type == 4 && (int)(Speed * 1.2) <= MaxSpeed)
+                    else if (block.Type == 4 && Speed < MaxSpeed)
                     {
-                        Speed *= (int)1.2;
+                        Speed += 1;
                         Score.score += 50;
                     }
 

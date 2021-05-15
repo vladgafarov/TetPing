@@ -23,7 +23,7 @@ namespace TetPing
                 Size = new Size { Width = Width, Height = Height },
                 Location = new Point {
                     X = form.Width - index * 40 - 60,
-                    Y = form.Top + 20
+                    Y = 20
                 },
                 BackgroundImage = HeartTexture,
                 BackgroundImageLayout = ImageLayout.Stretch,

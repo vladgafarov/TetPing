@@ -35,7 +35,6 @@ namespace TetPing
             Block = new Block();
             Score = new Score(form);
 
-            
             DownShiftInterval = 5400;
         }
 
@@ -48,11 +47,11 @@ namespace TetPing
             //List<Block> copyBlockList = new List<Block>(Map.BlocksList);
 
             if (Balls.Count == 3)
-                DownShiftInterval = 3900;
+                DownShiftInterval = 2100;
             else if (Balls.Count == 2)
-                DownShiftInterval = 4800;
+                DownShiftInterval = 3600;
             else
-                DownShiftInterval = 5400;
+                DownShiftInterval = 900;
 
             Board.InitPhysics(left, right, form);
 
@@ -64,11 +63,11 @@ namespace TetPing
                 if(ball.IsFailed)
                 {
                     Hearts.RemoveHeart(form);
-                    if(index == 0)
+                    if(Balls.Count == 1)
                         ball.IsFailed = false;
                 }
 
-                if(index > 0 && ball.IsFailed)
+                if(Balls.Count > 1 && ball.IsFailed)
                 {
                     Balls.BallsList.Remove(ball);
                     Balls.Count -= 1;
