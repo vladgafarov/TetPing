@@ -11,14 +11,14 @@ namespace TetPing
     class GameOver
     {
         public static Label Label;
-        private int Width = 300;
-        private int Height = 100;
+        private int Width = 400;
+        private int Height = 360;
 
         public GameOver(Control form)
         {
             Label = new Label
             {
-                Text = "Game over Enter",
+                Text = "Game over \n Enter - Restart \n Esc - Exit",
                 Font = new Font("Courier New", 32),
                 TextAlign = ContentAlignment.MiddleCenter,
                 Size = new Size
@@ -32,6 +32,7 @@ namespace TetPing
                     Y = form.Height / 2 - Height / 2 - 30
                 },
                 BackColor = Color.BurlyWood,
+                Padding = new Padding(0),
                 Visible = false
             };
 

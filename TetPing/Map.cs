@@ -43,6 +43,24 @@ namespace TetPing
             }
         }
 
+        public static void Reset()
+        {
+            BlocksList.Clear();
+            ResetMap();
+            Block.CreateBlocks(6, 4);
+        }
+
+        public static void ResetMap()
+        {
+            for (var y = 0; y < mapHeight; y++)
+            {
+                for (var x = 0; x < mapWidth; x++)
+                {
+                    map[y, x] = 0;
+                }
+            }
+        }
+
         public static bool IsHiddenPartEmpty(int heightForSearching)
         {
             int count = 0;

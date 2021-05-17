@@ -15,7 +15,9 @@ namespace TetPing
         public Menu()
         {
             InitializeComponent();
-            Size = new Size(600, 600);
+            Size = new Size(600, 720);
+            BackgroundImage = Resources.Resource1.bgNew;
+            BackgroundImageLayout = ImageLayout.Center;
 
             var button = new Button {
                 Name = "button1",
@@ -23,20 +25,27 @@ namespace TetPing
                 Text = "Play",
                 Size = new Size
                 {
-                    Width = 120,
-                    Height = 40
+                    Width = 180,
+                    Height = 60
                 },
+                Font = new Font("Verdana", 22),
                 TextAlign = ContentAlignment.MiddleCenter,
                 Location = new Point
                 {
-                    X = Width / 2 - 60,
-                    Y = Height / 2 - 20
+                    X = Width / 2 - 90,
+                    Y = Height / 2 - 30
                 }
             };
 
             button.Click += button1_Click;
+            //this.OnFormClosed += Menu_FormClosing;
 
             Controls.Add(button);
+        }
+
+        private void Menu_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            Application.Exit();
         }
 
         private void button1_Click(object sender, EventArgs e)

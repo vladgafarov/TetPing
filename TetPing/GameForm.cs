@@ -58,7 +58,14 @@ namespace TetPing
             SetDirection(e, KeyDirection.Down);
             if(Game.IsGameEnd && e.KeyCode == Keys.Enter)
             {
-                game.ResetGame(timer1);
+                game.ResetGame(this, timer1);
+            }
+            if (Game.IsGameEnd && e.KeyCode == Keys.Escape)
+            {
+                //Hide();
+                //var Menu = new Menu();
+                //Menu.Show();
+                Application.Exit();
             }
         }
         

@@ -42,16 +42,15 @@ namespace TetPing
 
         public void NewGame(Control form)
         {
-            var removedHearts = Hearts.RemovedHearts;
             List<Ball> copyBallsList = new List<Ball>(Balls.BallsList);
             //List<Block> copyBlockList = new List<Block>(Map.BlocksList);
 
             if (Balls.Count == 3)
-                DownShiftInterval = 2100;
+                DownShiftInterval = 2700;
             else if (Balls.Count == 2)
-                DownShiftInterval = 3600;
+                DownShiftInterval = 3900;
             else
-                DownShiftInterval = 900;
+                DownShiftInterval = 5400;
 
             Board.InitPhysics(left, right, form);
 
@@ -79,11 +78,12 @@ namespace TetPing
                 if (GameForm.time % DownShiftInterval == 0)
                 {
                     block.DownShift();
+                    GameForm.time = 0;
                 };
 
             });
 
-            if (Map.IsHiddenPartEmpty(4))
+            if (Map.IsHiddenPartEmpty(5))
             {
                 Block.CreateBlocks(6, 1);
             }
@@ -100,17 +100,18 @@ namespace TetPing
             GameOver.EndTrigger();
         }
 
-        public void ResetGame(Timer timer)
+        public void ResetGame(Control form, Timer timer)
         {
             IsGameEnd = false;
             timer.Start();
 
-            Hearts.RemovedHearts = 0;
-            Hearts.Reset();
+            Hearts.Reset(form);
 
             Board.Reset();
 
-            //Balls.Reset();
+            Map.Reset();
+
+            Balls.Reset();
 
             GameOver.Reset();
         }

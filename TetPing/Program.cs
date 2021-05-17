@@ -17,7 +17,7 @@ namespace TetPing
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new GameForm());
+            Application.Run(new Menu());
         }
     }
 }

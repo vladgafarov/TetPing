@@ -30,7 +30,9 @@ namespace TetPing
 
         public static void Reset()
         {
-            BallsList.ForEach(ball => ball.Dispose());
+            BallsList.Clear();
+            Count = 1;
+            BallsList.Add(new Ball());
         }
     }
 }

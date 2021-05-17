@@ -11,7 +11,6 @@ namespace TetPing
     {
         public static int Count = 3;
         public static int MaxCount = 5;
-        public static int RemovedHearts = 0;
         public static List<Heart> HeartsList = new List<Heart>(Count);
 
         public Hearts(Control form)
@@ -43,9 +42,15 @@ namespace TetPing
             HeartsList.RemoveAt(Count);
         }
 
-        public void Reset()
+        public void Reset(Control form)
         {
-            HeartsList.ForEach(heart => heart.ChangeBg());
+            HeartsList.Clear();
+            Count = 3;
+            for (var i = 0; i < Count; i++)
+            {
+                var heartItem = new Heart(form, i);
+                HeartsList.Add(heartItem);
+            }
         }
     }
 }

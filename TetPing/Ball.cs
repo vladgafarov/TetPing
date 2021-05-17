@@ -24,7 +24,7 @@ namespace TetPing
             SpeedHorizontal = Speed;
             SpeedVertical = -Speed;
             X = GameForm.Width / 2 - Size / 2;
-            Y = GameForm.Height - GameForm.Height / 5;
+            Y = GameForm.Height - GameForm.Height / 4;
 
             ball = new Rectangle(X, Y, Size, Size);
         }
