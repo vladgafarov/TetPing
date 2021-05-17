@@ -12,7 +12,8 @@ namespace TetPing
     {
         private int Width = 120;
         private int Height = 32;
-        private const int Speed = 18;
+        public static int Speed = 18;
+        public static int MaxSpeed = 30;
         private Image BoardTexture = Resources.Resource1.board1;
         private Rectangle board;
         private int X;
@@ -77,6 +78,7 @@ namespace TetPing
                 X = X,
                 Y = Y
             };
+            Speed = 18;
         }
 
         public void Draw(PaintEventArgs e)

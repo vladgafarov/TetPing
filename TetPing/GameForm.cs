@@ -94,5 +94,10 @@ namespace TetPing
             if(Game.IsGameEnd)
                 timer1.Stop();
         }
+
+        private void GameForm_FormClosed(object sender, FormClosedEventArgs e)
+        {
+            Application.Exit();
+        }
     }
 }

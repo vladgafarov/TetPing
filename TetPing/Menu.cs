@@ -17,6 +17,7 @@ namespace TetPing
             InitializeComponent();
             Size = new Size(600, 720);
             BackgroundImage = Resources.Resource1.bgNew;
+            StartPosition = FormStartPosition.CenterScreen;
             BackgroundImageLayout = ImageLayout.Center;
 
             var button = new Button {

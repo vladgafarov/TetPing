@@ -104,6 +104,8 @@ namespace TetPing
         {
             IsGameEnd = false;
             timer.Start();
+            Score.score = 0;
+            Score.ScoreBoard.Text = "0";
 
             Hearts.Reset(form);
 

@@ -147,14 +147,17 @@ namespace TetPing
                         Score.score += 50;
                     }
 
-                    else if (block.Type == 3)
+                    else if (block.Type == 3 && Board.Speed < Board.MaxSpeed)
                     {
                         Score.score += 100;
+                        Board.Speed += 2; 
                     }
 
                     else if (block.Type == 4 && Speed < MaxSpeed)
                     {
                         Speed += 1;
+                        SpeedHorizontal = Speed;
+                        SpeedVertical = Speed;
                         Score.score += 50;
                     }
 
