@@ -32,13 +32,5 @@ namespace TetPing
 
             form.Controls.Add(HeartItem);
         }
-
-        public void ChangeBg()
-        {
-            if (HeartItem.BackgroundImage == HeartTexture)
-                HeartItem.BackgroundImage = WithoutHeartTexture;
-            else
-                HeartItem.BackgroundImage = HeartTexture;
-        }
     }
 }

@@ -20,9 +20,25 @@ namespace TetPing
             StartPosition = FormStartPosition.CenterScreen;
             BackgroundImageLayout = ImageLayout.Center;
 
+            var logo = new PictureBox
+            {
+                Size = new Size
+                {
+                    Width = 300,
+                    Height = 300
+                },
+                Location = new Point
+                {
+                    X = Width / 2 - 150,
+                    Y = 40
+                },
+                BackColor = Color.Transparent,
+                BackgroundImage = Resources.Resource1.logo,
+                BackgroundImageLayout = ImageLayout.Stretch,
+            };
+
             var button = new Button {
                 Name = "button1",
-                //Tag = "button1",
                 Text = "Play",
                 Size = new Size
                 {
@@ -34,14 +50,14 @@ namespace TetPing
                 Location = new Point
                 {
                     X = Width / 2 - 90,
-                    Y = Height / 2 - 30
+                    Y = Height / 2 - 30 + 80
                 }
             };
 
             button.Click += button1_Click;
-            //this.OnFormClosed += Menu_FormClosing;
 
             Controls.Add(button);
+            Controls.Add(logo);
         }
 
         private void Menu_FormClosing(object sender, FormClosingEventArgs e)
