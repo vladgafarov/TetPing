@@ -9,13 +9,14 @@ namespace TetPing
 {
     class Balls
     {
-        public static int Count = 1;
+        public static int Count;
         public static List<Ball> BallsList = new List<Ball>(Count);
         public static int MaxCount = 3;
         private static Ball FirstBall;
 
         public Balls(Ball firstBall)
         {
+            Count = 1;
             FirstBall = firstBall;
             BallsList.Add(FirstBall);
         }

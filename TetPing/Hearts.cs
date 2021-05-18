@@ -9,12 +9,14 @@ namespace TetPing
 {
     class Hearts
     {
-        public static int Count = 3;
+        public static int Count;
         public static int MaxCount = 5;
         public static List<Heart> HeartsList = new List<Heart>(Count);
 
         public Hearts()
         {
+            Count = 3;
+
             for(var i = 0; i < Count; i++)
             {
                 var heartItem = new Heart(i);
@@ -30,7 +32,7 @@ namespace TetPing
             Count++;
         }
 
-        public void RemoveHeart()
+        public static void RemoveHeart()
         {
             Count--;
 

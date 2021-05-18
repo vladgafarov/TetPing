@@ -13,22 +13,34 @@ namespace TetPing
     public class Tests
     {
         [Test]
-        public void AddBall()
+        public void AddBalls()
         {
             Balls.AddBall();
             Balls.AddBall();
             Balls.AddBall();
 
-            Assert.AreEqual(Balls.BallsList.Count, 3);
+            Assert.AreEqual(3, Balls.Count);
         }
 
-        //[Test]
-        //public void RemoveHeart(Control form)
-        //{
-        //    var hearts = new Hearts(form);
-        //    Hearts.RemoveHeart(2);
+        [Test]
+        public void AddHearts()
+        {
+            Hearts.AddHeart();
+            Hearts.AddHeart();
+            Hearts.AddHeart();
 
-        //    Assert.AreEqual(Hearts.RemovedHearts, 1);
-        //}
+            Assert.AreEqual(3, Hearts.Count);
+        }
+
+        [Test]
+        public void RemoveHearts()
+        {
+            Hearts.AddHeart();
+            Hearts.AddHeart();
+            Hearts.RemoveHeart();
+            Hearts.RemoveHeart();
+
+            Assert.AreEqual(0, Hearts.Count);
+        }
     }
 }
