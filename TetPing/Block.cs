@@ -17,7 +17,7 @@ namespace TetPing
     class Block
     {
         public const int Size = 40;
-        public int Type;
+        public BlockType Type;
         private Image BlockTexture;
         private Rectangle block;
         private int MapX;
@@ -31,23 +31,34 @@ namespace TetPing
             CreateBlocks(6, 4);
         }
 
-        public Block(int x, int y, int typeNumber)
+        public Block(int x, int y, BlockType type)
         {
             MapX = x;
             MapY = y;
             Y = y;
-            Type = typeNumber;
+            Type = type;
 
-            if (Type == 2)
+            if (Type == BlockType.Ball)
                 BlockTexture = Resources.Resource1.blockBall;
-            else if (Type == 3)
+            else if (Type == BlockType.BoardSpeed)
                 BlockTexture = Resources.Resource1.blockExtraPoints;
-            else if (Type == 4)
+            else if (Type == BlockType.BallSpeed)
                 BlockTexture = Resources.Resource1.blockAddSpeed;
-            else if (Type == 5)
+            else if (Type == BlockType.Heart)
                 BlockTexture = Resources.Resource1.blockAddHeart;
-            else
+            else if (Type == BlockType.Standart)
                 BlockTexture = Resources.Resource1.blockNew;
+
+            //if (Type == 2)
+            //    BlockTexture = Resources.Resource1.blockBall;
+            //else if (Type == 3)
+            //    BlockTexture = Resources.Resource1.blockExtraPoints;
+            //else if (Type == 4)
+            //    BlockTexture = Resources.Resource1.blockAddSpeed;
+            //else if (Type == 5)
+            //    BlockTexture = Resources.Resource1.blockAddHeart;
+            //else
+            //    BlockTexture = Resources.Resource1.blockNew;
 
             Y -= 3;
             block = new Rectangle(x * Size, Y * Size, Size, Size);
@@ -210,22 +221,22 @@ namespace TetPing
             }
         }
 
-        private static int GetRandomBlockType()
+        private static BlockType GetRandomBlockType()
         {
             var BlockTypeBallRandom = 20;
 
-            var type = 1;
+            var type = BlockType.Standart;
             var BlockTypeChance = random.Next(BlockTypeBallRandom);
             var BlockAddHeartChance = random.Next(50);
 
             if (BlockTypeChance == 0)
-                type = 2;
+                type = BlockType.Ball;
             else if (BlockTypeChance == 1 || BlockTypeChance == 2)
-                type = 3;
+                type = BlockType.BoardSpeed;
             else if (BlockTypeChance == 3)
-                type = 4;
+                type = BlockType.BallSpeed;
             if (BlockAddHeartChance == 0)
-                type = 5;
+                type = BlockType.Heart;
 
             return type;
         }

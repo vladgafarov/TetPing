@@ -85,8 +85,6 @@ namespace TetPing
                 var ballLeft = ball.Left;
                 var ballRight = ball.Right;
                 
-                var isDone = false;
-
                 if (ball.IntersectsWith(rectBlock))
                 {
                     #region Trajectory
@@ -135,38 +133,20 @@ namespace TetPing
                     }
                     #endregion
 
+                    if (block.Type == BlockType.Standart)
+                        StandartAction();
 
-                    if (block.Type == 1)
-                    {
-                        Score.score += 10;
-                    }
+                    else if (block.Type == BlockType.Ball && Balls.Count < Balls.MaxCount)
+                        AddBall();
 
-                    else if (block.Type == 2 && Balls.Count < Balls.MaxCount)
-                    {
-                        Balls.AddBall();
-                        Score.score += 50;
-                    }
+                    else if (block.Type == BlockType.BoardSpeed && Board.Speed < Board.MaxSpeed)
+                        IncreaseBoardSpeed();
 
-                    else if (block.Type == 3 && Board.Speed < Board.MaxSpeed)
-                    {
-                        Score.score += 100;
-                        Board.Speed += 2; 
-                    }
+                    else if (block.Type == BlockType.BallSpeed && Speed < MaxSpeed)
+                        IncreaseBallSpeed();
 
-                    else if (block.Type == 4 && Speed < MaxSpeed)
-                    {
-                        Speed += 1;
-                        SpeedHorizontal = Speed;
-                        SpeedVertical = Speed;
-                        Score.score += 50;
-                    }
-
-                    else if (block.Type == 5 && Hearts.Count < Hearts.MaxCount && !isDone)
-                    {
-                        isDone = true;
-                        Hearts.AddHeart(form);
-                        Score.score += 50;
-                    }
+                    else if (block.Type == BlockType.Heart && Hearts.Count < Hearts.MaxCount)
+                        AddHeart();
 
                     Score.ScoreBoard.Text = Score.score.ToString();
                     block.Remove();
@@ -174,9 +154,31 @@ namespace TetPing
             });
         }
 
-        public void Dispose()
+        private void StandartAction()
         {
-            Dispose();
+            Score.score += 10;
+        }
+        private void AddBall()
+        {
+            Balls.AddBall();
+            Score.score += 50;
+        }
+        private void IncreaseBoardSpeed()
+        {
+            Score.score += 100;
+            Board.Speed += 2;
+        }
+        private void IncreaseBallSpeed()
+        {
+            Speed += 1;
+            SpeedHorizontal = Speed;
+            SpeedVertical = Speed;
+            Score.score += 50;
+        }
+        private void AddHeart()
+        {
+            Hearts.AddHeart();
+            Score.score += 50;
         }
     }
 }

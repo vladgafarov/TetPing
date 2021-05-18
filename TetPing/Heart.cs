@@ -13,24 +13,32 @@ namespace TetPing
         private static int Width = 37;
         private static int Height = 32;
         private static Image HeartTexture = Resources.Resource1.heartNew;
-        private static Image WithoutHeartTexture = Resources.Resource1.withoutHeart;
         public PictureBox HeartItem;
+        public Rectangle heart;
 
-        public Heart(Control form, int index)
+        public Heart(int index)
         {
-            HeartItem = new PictureBox
-            {
-                Size = new Size { Width = Width, Height = Height },
-                Location = new Point {
-                    X = form.Width - index * 40 - 60,
-                    Y = 20
-                },
-                BackgroundImage = HeartTexture,
-                BackgroundImageLayout = ImageLayout.Stretch,
-                BackColor = Color.Transparent
-            };
+            heart = new Rectangle(GameForm.Width - index * 40 - 60, 20, Width, Height);
 
-            form.Controls.Add(HeartItem);
+            //HeartItem = new PictureBox
+            //{
+            //    Size = new Size { Width = Width, Height = Height },
+            //    Location = new Point {
+            //        X = form.Width - index * 40 - 60,
+            //        Y = 20
+            //    },
+            //    BackgroundImage = HeartTexture,
+            //    BackgroundImageLayout = ImageLayout.Stretch,
+            //    BackColor = Color.Transparent
+
+            //};
+
+            //form.Controls.Add(HeartItem);
+        }
+
+        public void Draw(PaintEventArgs e)
+        {
+            e.Graphics.DrawImage(HeartTexture, heart);
         }
     }
 }

@@ -15,7 +15,6 @@ namespace TetPing
         private Ball Ball;
         private Hearts Hearts;
         private GameOver GameOver;
-        private Arrow Arrow;
         private Block Block;
         private Map Map;
         private Score Score;
@@ -25,11 +24,10 @@ namespace TetPing
 
         public Game(Control form)
         {
-            //Arrow = new Arrow(form);
             Board = new Board();
             Ball = new Ball();
             Balls = new Balls(Ball);
-            Hearts = new Hearts(form);
+            Hearts = new Hearts();
             GameOver = new GameOver(form);
             Map = new Map();
             Block = new Block();
@@ -61,7 +59,7 @@ namespace TetPing
 
                 if(ball.IsFailed)
                 {
-                    Hearts.RemoveHeart(form);
+                    Hearts.RemoveHeart();
                     if(Balls.Count == 1)
                         ball.IsFailed = false;
                 }
@@ -84,14 +82,10 @@ namespace TetPing
             });
 
             if (Map.IsHiddenPartEmpty(5))
-            {
                 Block.CreateBlocks(6, 1);
-            }
 
             if(Hearts.Count == 0)
-            {
                 EndGame();
-            }
         }
 
         public static void EndGame()
@@ -104,17 +98,14 @@ namespace TetPing
         {
             IsGameEnd = false;
             timer.Start();
+
             Score.score = 0;
             Score.ScoreBoard.Text = "0";
 
-            Hearts.Reset(form);
-
+            Hearts.Reset();
             Board.Reset();
-
             Map.Reset();
-
             Balls.Reset();
-
             GameOver.Reset();
         }
 
@@ -124,6 +115,7 @@ namespace TetPing
         {
             Balls.BallsList.ForEach(ball => ball.Draw(e));
             Map.BlocksList.ForEach(block => block.Draw(e));
+            Hearts.HeartsList.ForEach(heart => heart.Draw(e));
             Board.Draw(e);
         }
 

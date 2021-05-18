@@ -9,14 +9,14 @@ namespace TetPing
 {
     class Map
     {
-        public static int[,] map;
+        public static BlockType[,] map;
         public static int mapHeight = 18;
         public static int mapWidth = 15;
         public static List<Block> BlocksList = new List<Block>();
 
         public Map()
         {
-            map = new int[mapHeight, mapWidth];
+            map = new BlockType[mapHeight, mapWidth];
 
             //map[0, 0] = 1;
             //map[0, 1] = 1;
@@ -34,7 +34,7 @@ namespace TetPing
             {
                 for(var x = 0; x < mapWidth; x++)
                 {
-                    if (map[y, x] != 0)
+                    if (map[y, x] != BlockType.None)
                     {
                         var block = new Block(x, y, map[y, x]);
                         BlocksList.Add(block);
@@ -56,7 +56,7 @@ namespace TetPing
             {
                 for (var x = 0; x < mapWidth; x++)
                 {
-                    map[y, x] = 0;
+                    map[y, x] = BlockType.None;
                 }
             }
         }
@@ -70,7 +70,7 @@ namespace TetPing
             {   
                 for (int j = 0; j < heightForSearching; j++)
                 {
-                    if (map[j, i] == 0)
+                    if (map[j, i] == BlockType.None)
                         count++;
                 }
             }

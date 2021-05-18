@@ -13,42 +13,38 @@ namespace TetPing
         public static int MaxCount = 5;
         public static List<Heart> HeartsList = new List<Heart>(Count);
 
-        public Hearts(Control form)
+        public Hearts()
         {
             for(var i = 0; i < Count; i++)
             {
-                var heartItem = new Heart(form, i);
+                var heartItem = new Heart(i);
                 HeartsList.Add(heartItem);
             }
         }
 
-        public static void AddHeart(Control form)
+        public static void AddHeart()
         {
-            var heart = new Heart(form, Count);
+            var heart = new Heart(Count);
             HeartsList.Add(heart);
 
             Count++;
         }
 
-        public void RemoveHeart(Control form)
+        public void RemoveHeart()
         {
-            //Heart heartToRemove = HeartsList[Count - index - 1];
-            //heartToRemove.ChangeBg();
-
-            //RemovedHearts++;
             Count--;
 
-            form.Controls.Remove(HeartsList[Count].HeartItem);
+            //form.Controls.Remove(HeartsList[Count].HeartItem);
             HeartsList.RemoveAt(Count);
         }
 
-        public void Reset(Control form)
+        public void Reset()
         {
             HeartsList.Clear();
             Count = 3;
             for (var i = 0; i < Count; i++)
             {
-                var heartItem = new Heart(form, i);
+                var heartItem = new Heart(i);
                 HeartsList.Add(heartItem);
             }
         }

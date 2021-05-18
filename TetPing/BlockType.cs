@@ -8,8 +8,11 @@ namespace TetPing
 {
     public enum BlockType
     {
+        None,
         Standart,
         Ball,
-        //ExtraPoints
+        BallSpeed,
+        BoardSpeed,
+        Heart
     }
 }
