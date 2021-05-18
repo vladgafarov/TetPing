@@ -34,7 +34,6 @@ namespace TetPing
         {
             Count--;
 
-            //form.Controls.Remove(HeartsList[Count].HeartItem);
             HeartsList.RemoveAt(Count);
         }
 

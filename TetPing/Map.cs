@@ -17,15 +17,6 @@ namespace TetPing
         public Map()
         {
             map = new BlockType[mapHeight, mapWidth];
-
-            //map[0, 0] = 1;
-            //map[0, 1] = 1;
-            //map[0, 2] = 1;
-            //map[1, 3] = 1;
-            //map[17, 14] = 1;
-            //map[10, 10] = 1;
-            //map[15, 14] = 1;
-            //Init();
         }
 
         public static void Init()

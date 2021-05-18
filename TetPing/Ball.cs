@@ -12,8 +12,6 @@ namespace TetPing
         private int MaxSpeed = 9;
         private int SpeedHorizontal;
         private int SpeedVertical;
-
-        // private Panel ball;
         private Image BallTexture = Resources.Resource1.ballNew;
         private Rectangle ball;
         private int X;

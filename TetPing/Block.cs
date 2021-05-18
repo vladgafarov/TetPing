@@ -49,33 +49,11 @@ namespace TetPing
             else if (Type == BlockType.Standart)
                 BlockTexture = Resources.Resource1.blockNew;
 
-            //if (Type == 2)
-            //    BlockTexture = Resources.Resource1.blockBall;
-            //else if (Type == 3)
-            //    BlockTexture = Resources.Resource1.blockExtraPoints;
-            //else if (Type == 4)
-            //    BlockTexture = Resources.Resource1.blockAddSpeed;
-            //else if (Type == 5)
-            //    BlockTexture = Resources.Resource1.blockAddHeart;
-            //else
-            //    BlockTexture = Resources.Resource1.blockNew;
-
             Y -= 3;
             block = new Rectangle(x * Size, Y * Size, Size, Size);
         }
 
         #region utils
-
-        public void SetLocation(int x, int y)
-        {
-            block.X = x * Size;
-            block.Y = y * Size;
-        }
-
-        public void SetX(int x)
-        {
-            block.X = x * Size;
-        }
 
         public void SetY(int y)
         {
@@ -229,13 +207,13 @@ namespace TetPing
             var BlockTypeChance = random.Next(BlockTypeBallRandom);
             var BlockAddHeartChance = random.Next(50);
 
-            if (BlockTypeChance == 0)
+            if (BlockTypeChance == 0) //5%
                 type = BlockType.Ball;
-            else if (BlockTypeChance == 1 || BlockTypeChance == 2)
+            else if (BlockTypeChance == 1 || BlockTypeChance == 2) //10%
                 type = BlockType.BoardSpeed;
-            else if (BlockTypeChance == 3)
+            else if (BlockTypeChance == 3) //5%
                 type = BlockType.BallSpeed;
-            if (BlockAddHeartChance == 0)
+            if (BlockAddHeartChance == 0) //2%
                 type = BlockType.Heart;
 
             return type;
