@@ -8,7 +8,7 @@ namespace TetPing
     {
         public bool IsFailed;
         private const int Size = 28;
-        private int Speed = 6;
+        public int Speed = 6;
         private int MaxSpeed = 9;
         private int SpeedHorizontal;
         private int SpeedVertical;
@@ -152,28 +152,28 @@ namespace TetPing
             });
         }
 
-        private void StandartAction()
+        public void StandartAction()
         {
             Score.score += 10;
         }
-        private void AddBall()
+        public void AddBall()
         {
             Balls.AddBall();
             Score.score += 50;
         }
-        private void IncreaseBoardSpeed()
+        public void IncreaseBoardSpeed()
         {
             Score.score += 100;
             Board.Speed += 2;
         }
-        private void IncreaseBallSpeed()
+        public void IncreaseBallSpeed()
         {
             Speed += 1;
             SpeedHorizontal = Speed;
             SpeedVertical = Speed;
             Score.score += 50;
         }
-        private void AddHeart()
+        public void AddHeart()
         {
             Hearts.AddHeart();
             Score.score += 50;
