@@ -35,12 +35,11 @@ namespace TetPing
         [Test]
         public void RemoveHearts()
         {
-            Hearts.AddHeart();
-            Hearts.AddHeart();
+            new Hearts();
             Hearts.RemoveHeart();
             Hearts.RemoveHeart();
 
-            Assert.AreEqual(0, Hearts.Count);
+            Assert.AreEqual(1, Hearts.Count);
         }
 
         [Test]
@@ -50,6 +49,17 @@ namespace TetPing
             ball.IncreaseBallSpeed();
 
             Assert.AreEqual(7, ball.Speed);
+        }
+
+        [Test]
+        public void ScoreValue()
+        {
+            var ball = new Ball();
+            ball.IncreaseBallSpeed();
+            ball.AddBall();
+            ball.StandartAction();
+
+            Assert.AreEqual(110, Score.score);
         }
 
         [Test]
