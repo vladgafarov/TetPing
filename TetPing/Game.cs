@@ -46,7 +46,7 @@ namespace TetPing
             if (Balls.Count == 3)
                 DownShiftInterval = 2700;
             else if (Balls.Count == 2)
-                DownShiftInterval = 3900;
+                DownShiftInterval = 3600;
             else
                 DownShiftInterval = 5400;
 

@@ -92,7 +92,8 @@ namespace TetPing
             {
                 BlocksTypes = random.NextEnum<BlocksTypes>();
                 Orientation = random.NextEnum<Orientation>();
-                var quantity = random.Next(3, 9);
+                var quantity = random.Next(3, 8);
+
 
                 switch (BlocksTypes)
                 {
