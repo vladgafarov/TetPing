@@ -13,9 +13,9 @@ namespace TetPing
     public partial class GameForm : Form
     {
         private Game game;
-        public static new int Width = 600;
-        public static new int Height = 720;
-        public static int time;
+        public new static int Width = 600;
+        public new static int Height = 720;
+        public static int Time;
 
         public GameForm()
         {
@@ -58,7 +58,7 @@ namespace TetPing
             SetDirection(e, KeyDirection.Down);
             if(Game.IsGameEnd && e.KeyCode == Keys.Enter)
             {
-                game.ResetGame(this, timer1);
+                game.ResetGame(timer1);
             }
             if (Game.IsGameEnd && e.KeyCode == Keys.Escape)
             {
@@ -87,7 +87,7 @@ namespace TetPing
         {
             Invalidate();
             //Refresh();
-            time += timer1.Interval;
+            Time += timer1.Interval;
             game.NewGame(this);
 
             if(Game.IsGameEnd)

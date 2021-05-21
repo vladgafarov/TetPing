@@ -202,19 +202,19 @@ namespace TetPing
 
         private static BlockType GetRandomBlockType()
         {
-            var BlockTypeBallRandom = 20;
+            var blockTypeBallRandom = 20;
 
             var type = BlockType.Standart;
-            var BlockTypeChance = random.Next(BlockTypeBallRandom);
-            var BlockAddHeartChance = random.Next(50);
+            var blockTypeChance = random.Next(blockTypeBallRandom);
+            var blockAddHeartChance = random.Next(50);
 
-            if (BlockTypeChance == 0) //5%
+            if (blockTypeChance == 0) //5%
                 type = BlockType.Ball;
-            else if (BlockTypeChance == 1 || BlockTypeChance == 2) //10%
+            else if (blockTypeChance == 1 || blockTypeChance == 2) //10%
                 type = BlockType.BoardSpeed;
-            else if (BlockTypeChance == 3) //5%
+            else if (blockTypeChance == 3) //5%
                 type = BlockType.BallSpeed;
-            if (BlockAddHeartChance == 0) //2%
+            if (blockAddHeartChance == 0) //2%
                 type = BlockType.Heart;
 
             return type;
