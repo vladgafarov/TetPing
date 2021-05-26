@@ -41,12 +41,11 @@ namespace TetPing
         public void NewGame(Control form)
         {
             List<Ball> copyBallsList = new List<Ball>(Balls.BallsList);
-            //List<Block> copyBlockList = new List<Block>(Map.BlocksList);
 
             if (Balls.Count == 3)
-                DownShiftInterval = 2700;
+                DownShiftInterval = 2100;
             else if (Balls.Count == 2)
-                DownShiftInterval = 3600;
+                DownShiftInterval = 3000;
             else
                 DownShiftInterval = 5400;
 
