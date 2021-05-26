@@ -42,19 +42,23 @@ namespace TetPing
         {
             List<Ball> copyBallsList = new List<Ball>(Balls.BallsList);
 
-            if (Balls.Count == 3)
-                DownShiftInterval = 2100;
-            else if (Balls.Count == 2)
-                DownShiftInterval = 3000;
-            else
-                DownShiftInterval = 5400;
+            switch (Balls.Count)
+            {
+                case 3:
+                    DownShiftInterval = 2100;
+                    break;
+                case 2:
+                    DownShiftInterval = 3000;
+                    break;
+                default:
+                    DownShiftInterval = 5400;
+                    break;
+            }
 
-            Board.InitPhysics(left, right, form);
+            Board.InitPhysics(left, right);
 
             copyBallsList.ForEach(ball => {
                 ball.InitPhysics(form, Board);
-
-                var index = Balls.BallsList.IndexOf(ball);
 
                 if(ball.IsFailed)
                 {
@@ -72,10 +76,10 @@ namespace TetPing
 
             Map.BlocksList.ForEach(block =>
             {
-                if (GameForm.time % DownShiftInterval == 0)
+                if (GameForm.Time % DownShiftInterval == 0)
                 {
                     block.DownShift();
-                    GameForm.time = 0;
+                    GameForm.Time = 0;
                 };
 
             });
@@ -93,7 +97,7 @@ namespace TetPing
             GameOver.EndTrigger();
         }
 
-        public void ResetGame(Control form, Timer timer)
+        public void ResetGame(Timer timer)
         {
             IsGameEnd = false;
             timer.Start();

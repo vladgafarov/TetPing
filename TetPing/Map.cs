@@ -54,8 +54,8 @@ namespace TetPing
 
         public static bool IsHiddenPartEmpty(int heightForSearching)
         {
-            int count = 0;
-            int countShould = mapWidth * heightForSearching;
+            var count = 0;
+            var countShould = mapWidth * heightForSearching;
 
             for (int i = 0; i < mapWidth; i++)
             {   

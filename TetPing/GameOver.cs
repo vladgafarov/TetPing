@@ -10,7 +10,7 @@ namespace TetPing
 {
     class GameOver
     {
-        public static Label Label;
+        private static Label Label;
         private int Width = 400;
         private int Height = 360;
 
@@ -44,7 +44,7 @@ namespace TetPing
             Label.Visible = true;
         }
 
-        public void Reset()
+        public static void Reset()
         {
             Label.Visible = false;
         }

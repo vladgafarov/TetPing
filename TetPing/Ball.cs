@@ -67,7 +67,7 @@ namespace TetPing
                 SpeedVertical *= -1;
             }
 
-            List<Block> copyBlocksList = new List<Block>(Map.BlocksList);
+            var copyBlocksList = new List<Block>(Map.BlocksList);
 
             copyBlocksList.ForEach(block =>
             {
@@ -131,20 +131,24 @@ namespace TetPing
                     }
                     #endregion
 
-                    if (block.Type == BlockType.Standart)
-                        StandartAction();
-
-                    else if (block.Type == BlockType.Ball && Balls.Count < Balls.MaxCount)
-                        AddBall();
-
-                    else if (block.Type == BlockType.BoardSpeed && Board.Speed < Board.MaxSpeed)
-                        IncreaseBoardSpeed();
-
-                    else if (block.Type == BlockType.BallSpeed && Speed < MaxSpeed)
-                        IncreaseBallSpeed();
-
-                    else if (block.Type == BlockType.Heart && Hearts.Count < Hearts.MaxCount)
-                        AddHeart();
+                    switch (block.Type)
+                    {
+                        case BlockType.Standart:
+                            StandartAction();
+                            break;
+                        case BlockType.Ball when Balls.Count < Balls.MaxCount:
+                            AddBall();
+                            break;
+                        case BlockType.BoardSpeed when Board.Speed < Board.MaxSpeed:
+                            IncreaseBoardSpeed();
+                            break;
+                        case BlockType.BallSpeed when Speed < MaxSpeed:
+                            IncreaseBallSpeed();
+                            break;
+                        case BlockType.Heart when Hearts.Count < Hearts.MaxCount:
+                            AddHeart();
+                            break;
+                    }
 
                     Score.ScoreBoard.Text = Score.score.ToString();
                     block.Remove();
